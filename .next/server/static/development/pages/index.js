@@ -110,7 +110,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_app__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_app__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! semantic-ui-react */ "semantic-ui-react");
 /* harmony import */ var semantic_ui_react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__);
-var _jsxFileName = "/Users/mattl/Dev/personal/amitrapped/client/components/Layout.js";
+var _jsxFileName = "/Users/mattl/Dev/personal/amitrapped-client/components/Layout.js";
 
 
 
@@ -198,7 +198,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _jsxFileName = "/Users/mattl/Dev/personal/amitrapped/client/components/LoginForm.js";
+var _jsxFileName = "/Users/mattl/Dev/personal/amitrapped-client/components/LoginForm.js";
 
 
 
@@ -543,7 +543,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _jsxFileName = "/Users/mattl/Dev/personal/amitrapped/client/lib/auth.js";
+var _jsxFileName = "/Users/mattl/Dev/personal/amitrapped-client/lib/auth.js";
 
 
 
@@ -2417,7 +2417,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_apollo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/apollo */ "./lib/apollo.js");
 /* harmony import */ var _components_Layout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Layout */ "./components/Layout.js");
 /* harmony import */ var _components_LoginForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/LoginForm */ "./components/LoginForm.js");
-var _jsxFileName = "/Users/mattl/Dev/personal/amitrapped/client/pages/index.js";
+var _jsxFileName = "/Users/mattl/Dev/personal/amitrapped-client/pages/index.js";
 
 
 
@@ -2454,7 +2454,7 @@ var _jsxFileName = "/Users/mattl/Dev/personal/amitrapped/client/pages/index.js";
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/mattl/Dev/personal/amitrapped/client/pages/index.js */"./pages/index.js");
+module.exports = __webpack_require__(/*! /Users/mattl/Dev/personal/amitrapped-client/pages/index.js */"./pages/index.js");
 
 
 /***/ }),
