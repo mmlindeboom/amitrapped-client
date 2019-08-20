@@ -31,9 +31,6 @@ const Login = ({ token }) => {
   const [login, {loading, data, error}] = useMutation(AUTHENTICATE_USER)
   const {inputs, handleChange, handleSubmit} = useLoginForm(() => login({variables: inputs}))
 
-  if (token) {
-    Router.push('/home')
-  }
   if (data && data.login) {
     loginReadyFor(data.login.token)
   }

@@ -29,13 +29,16 @@ const LOGOUT_USER = gql`
 
 
 export default function({ client, children }) {
-  const [logOutUser, {loggedOut}] = useMutation(LOGOUT_USER)
+  const [logOutUser, {loggedOut}] = useMutation(LOGOUT_USER, {
+    notifyOnNetworkStatusChange: true
+  })
+
+  if (loggedOut) console.log('loggedOut')
 
   const handleLogout = () => {
     logOutUser()
     logout(client)
   }
-  if (loggedOut) console.log('loggedOut')
 
   const gridStyles = {
     maxWidth: '1280px',

@@ -26,14 +26,16 @@ import { GET_USER } from '../data/user'
 
 
 const Home = (props => {
-  const {client, loading, error, data: { user } } = useQuery(GET_USER)
+  const {client, loading, error, data} = useQuery(GET_USER)
 
   let firstName = ''
-
+  if (error) {
+    return <div>{error.message}</div>
+  }
   if (loading) {
     return <AppLayout><Dimmer><Loader></Loader></Dimmer></AppLayout>
   }
-  if (user) firstName = user.firstName
+  if (data && data.user) firstName = data.user.firstName
 
   return (
     <AppLayout client={client}>
@@ -91,4 +93,4 @@ const Home = (props => {
   )
 })
 
-export default withAuthSync(withData(Home))
+export default withData(withAuthSync(Home))

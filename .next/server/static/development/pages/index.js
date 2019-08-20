@@ -252,10 +252,6 @@ const Login = ({
     variables: inputs
   }));
 
-  if (token) {
-    next_router__WEBPACK_IMPORTED_MODULE_7__["Router"].push('/home');
-  }
-
   if (data && data.login) {
     Object(_lib_auth__WEBPACK_IMPORTED_MODULE_6__["loginReadyFor"])(data.login.token);
   }
@@ -263,25 +259,25 @@ const Login = ({
   return __jsx(next_app__WEBPACK_IMPORTED_MODULE_4__["Container"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 42
+      lineNumber: 39
     },
     __self: undefined
   }, error && __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Message"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 44
+      lineNumber: 41
     },
     __self: undefined
   }, error.message), loading && __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Dimmer"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 47
+      lineNumber: 44
     },
     __self: undefined
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Loader"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 47
+      lineNumber: 44
     },
     __self: undefined
   })), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"], {
@@ -292,7 +288,7 @@ const Login = ({
     verticalAlign: "middle",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 49
+      lineNumber: 46
     },
     __self: undefined
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Grid"].Column, {
@@ -301,7 +297,7 @@ const Login = ({
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 50
+      lineNumber: 47
     },
     __self: undefined
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Header"], {
@@ -310,7 +306,7 @@ const Login = ({
     textAlign: "center",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 51
+      lineNumber: 48
     },
     __self: undefined
   }, "Log-in to your account"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Form"], {
@@ -318,14 +314,14 @@ const Login = ({
     onSubmit: handleSubmit,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 55
+      lineNumber: 52
     },
     __self: undefined
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Segment"], {
     stacked: true,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 56
+      lineNumber: 53
     },
     __self: undefined
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Form"].Input, {
@@ -338,7 +334,7 @@ const Login = ({
     onChange: handleChange,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 57
+      lineNumber: 54
     },
     __self: undefined
   }), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Form"].Input, {
@@ -352,7 +348,7 @@ const Login = ({
     onChange: handleChange,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 63
+      lineNumber: 60
     },
     __self: undefined
   }), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Button"], {
@@ -362,26 +358,26 @@ const Login = ({
     type: "submit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 74
+      lineNumber: 71
     },
     __self: undefined
   }, "Login"))), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_3__["Message"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 79
+      lineNumber: 76
     },
     __self: undefined
   }, "New to us? ", __jsx(next_link__WEBPACK_IMPORTED_MODULE_5___default.a, {
     href: "/signup",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 80
+      lineNumber: 77
     },
     __self: undefined
   }, __jsx("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 80
+      lineNumber: 77
     },
     __self: undefined
   }, "Sign Up"))))));
@@ -531,14 +527,14 @@ async function loginReadyFor(token) {
     js_cookie__WEBPACK_IMPORTED_MODULE_7___default.a.set('token', token, {
       expires: 1
     });
-    res(next_router__WEBPACK_IMPORTED_MODULE_6___default.a.push('/home'));
+    res(next_router__WEBPACK_IMPORTED_MODULE_6___default.a.replace('/home'));
   });
 }
 function logout(client) {
-  js_cookie__WEBPACK_IMPORTED_MODULE_7___default.a.remove('token'); // to support logging out from all windows
+  js_cookie__WEBPACK_IMPORTED_MODULE_7___default.a.remove('token');
+  if (client) client.clearStore(); // to support logging out from all windows
 
   window.localStorage.setItem('logout', _babel_runtime_corejs2_core_js_date_now__WEBPACK_IMPORTED_MODULE_3___default()());
-  if (client) client.resetStore();
   next_router__WEBPACK_IMPORTED_MODULE_6___default.a.push('/');
 }
 

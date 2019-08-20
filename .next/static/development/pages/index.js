@@ -160,10 +160,6 @@ var Login = function Login(_ref) {
       handleChange = _useLoginForm.handleChange,
       handleSubmit = _useLoginForm.handleSubmit;
 
-  if (token) {
-    next_router__WEBPACK_IMPORTED_MODULE_9__["Router"].push('/home');
-  }
-
   if (data && data.login) {
     Object(_lib_auth__WEBPACK_IMPORTED_MODULE_8__["loginReadyFor"])(data.login.token);
   }
@@ -171,25 +167,25 @@ var Login = function Login(_ref) {
   return __jsx(next_app__WEBPACK_IMPORTED_MODULE_6__["Container"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 42
+      lineNumber: 39
     },
     __self: this
   }, error && __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_5__["Message"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 44
+      lineNumber: 41
     },
     __self: this
   }, error.message), loading && __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_5__["Dimmer"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 47
+      lineNumber: 44
     },
     __self: this
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_5__["Loader"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 47
+      lineNumber: 44
     },
     __self: this
   })), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_5__["Grid"], {
@@ -200,7 +196,7 @@ var Login = function Login(_ref) {
     verticalAlign: "middle",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 49
+      lineNumber: 46
     },
     __self: this
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_5__["Grid"].Column, {
@@ -209,7 +205,7 @@ var Login = function Login(_ref) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 50
+      lineNumber: 47
     },
     __self: this
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_5__["Header"], {
@@ -218,7 +214,7 @@ var Login = function Login(_ref) {
     textAlign: "center",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 51
+      lineNumber: 48
     },
     __self: this
   }, "Log-in to your account"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_5__["Form"], {
@@ -226,14 +222,14 @@ var Login = function Login(_ref) {
     onSubmit: handleSubmit,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 55
+      lineNumber: 52
     },
     __self: this
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_5__["Segment"], {
     stacked: true,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 56
+      lineNumber: 53
     },
     __self: this
   }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_5__["Form"].Input, {
@@ -246,7 +242,7 @@ var Login = function Login(_ref) {
     onChange: handleChange,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 57
+      lineNumber: 54
     },
     __self: this
   }), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_5__["Form"].Input, {
@@ -260,7 +256,7 @@ var Login = function Login(_ref) {
     onChange: handleChange,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 63
+      lineNumber: 60
     },
     __self: this
   }), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_5__["Button"], {
@@ -270,26 +266,26 @@ var Login = function Login(_ref) {
     type: "submit",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 74
+      lineNumber: 71
     },
     __self: this
   }, "Login"))), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_5__["Message"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 79
+      lineNumber: 76
     },
     __self: this
   }, "New to us? ", __jsx(next_link__WEBPACK_IMPORTED_MODULE_7___default.a, {
     href: "/signup",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 80
+      lineNumber: 77
     },
     __self: this
   }, __jsx("a", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 80
+      lineNumber: 77
     },
     __self: this
   }, "Sign Up"))))));
@@ -481,7 +477,7 @@ function _loginReadyFor() {
               js_cookie__WEBPACK_IMPORTED_MODULE_15___default.a.set('token', token, {
                 expires: 1
               });
-              res(next_router__WEBPACK_IMPORTED_MODULE_14___default.a.push('/home'));
+              res(next_router__WEBPACK_IMPORTED_MODULE_14___default.a.replace('/home'));
             }));
 
           case 1:
@@ -495,10 +491,10 @@ function _loginReadyFor() {
 }
 
 function logout(client) {
-  js_cookie__WEBPACK_IMPORTED_MODULE_15___default.a.remove('token'); // to support logging out from all windows
+  js_cookie__WEBPACK_IMPORTED_MODULE_15___default.a.remove('token');
+  if (client) client.clearStore(); // to support logging out from all windows
 
   window.localStorage.setItem('logout', _babel_runtime_corejs2_core_js_date_now__WEBPACK_IMPORTED_MODULE_11___default()());
-  if (client) client.resetStore();
   next_router__WEBPACK_IMPORTED_MODULE_14___default.a.push('/');
 }
 
