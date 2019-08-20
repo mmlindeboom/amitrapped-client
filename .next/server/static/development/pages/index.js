@@ -463,14 +463,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(apollo_boost__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var apollo_link_context__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! apollo-link-context */ "apollo-link-context");
 /* harmony import */ var apollo_link_context__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(apollo_link_context__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./auth */ "./lib/auth.js");
+/* harmony import */ var next_config__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! next/config */ "next/config");
+/* harmony import */ var next_config__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_config__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./auth */ "./lib/auth.js");
 
 
 
 
+
+
+var _getConfig = next_config__WEBPACK_IMPORTED_MODULE_3___default()(),
+    publicRuntimeConfig = _getConfig.publicRuntimeConfig;
+
+var API_HOST = publicRuntimeConfig.apiURL;
+var CLIENT_HOST = publicRuntimeConfig.clientURL;
 var authLink = Object(apollo_link_context__WEBPACK_IMPORTED_MODULE_2__["setContext"])(function (_, _ref) {
   var cache = _ref.cache;
-  var token = Object(_auth__WEBPACK_IMPORTED_MODULE_3__["getToken"])();
+  var token = Object(_auth__WEBPACK_IMPORTED_MODULE_4__["getToken"])();
   return {
     headers: {
       authorization: token ? "Bearer ".concat(token) : ''
@@ -478,10 +487,10 @@ var authLink = Object(apollo_link_context__WEBPACK_IMPORTED_MODULE_2__["setConte
   };
 });
 var httpLink = new apollo_boost__WEBPACK_IMPORTED_MODULE_1__["HttpLink"]({
-  uri: "http://127.0.0.1:3001/graphql",
+  uri: API_HOST,
   // Server URL (must be absolute)
   cors: {
-    origin: 'http://127.0.0.1:3000',
+    origin: CLIENT_HOST,
     credentials: true
   }
 });
@@ -2775,6 +2784,17 @@ module.exports = require("next-server/dist/lib/router/router");
 /***/ (function(module, exports) {
 
 module.exports = require("next-server/dist/lib/utils");
+
+/***/ }),
+
+/***/ "next/config":
+/*!******************************!*\
+  !*** external "next/config" ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("next/config");
 
 /***/ }),
 

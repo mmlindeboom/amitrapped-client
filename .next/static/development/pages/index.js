@@ -364,14 +364,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_apollo__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_apollo__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var apollo_boost__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! apollo-boost */ "./node_modules/apollo-boost/lib/bundle.esm.js");
 /* harmony import */ var apollo_link_context__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! apollo-link-context */ "./node_modules/apollo-link-context/lib/bundle.esm.js");
-/* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./auth */ "./lib/auth.js");
+/* harmony import */ var next_config__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! next/config */ "./node_modules/next-server/dist/lib/runtime-config.js");
+/* harmony import */ var next_config__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_config__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./auth */ "./lib/auth.js");
 
 
 
 
+
+
+var _getConfig = next_config__WEBPACK_IMPORTED_MODULE_3___default()(),
+    publicRuntimeConfig = _getConfig.publicRuntimeConfig;
+
+var API_HOST = publicRuntimeConfig.apiURL;
+var CLIENT_HOST = publicRuntimeConfig.clientURL;
 var authLink = Object(apollo_link_context__WEBPACK_IMPORTED_MODULE_2__["setContext"])(function (_, _ref) {
   var cache = _ref.cache;
-  var token = Object(_auth__WEBPACK_IMPORTED_MODULE_3__["getToken"])();
+  var token = Object(_auth__WEBPACK_IMPORTED_MODULE_4__["getToken"])();
   return {
     headers: {
       authorization: token ? "Bearer ".concat(token) : ''
@@ -379,10 +388,10 @@ var authLink = Object(apollo_link_context__WEBPACK_IMPORTED_MODULE_2__["setConte
   };
 });
 var httpLink = new apollo_boost__WEBPACK_IMPORTED_MODULE_1__["HttpLink"]({
-  uri: "http://127.0.0.1:3001/graphql",
+  uri: API_HOST,
   // Server URL (must be absolute)
   cors: {
-    origin: 'http://127.0.0.1:3000',
+    origin: CLIENT_HOST,
     credentials: true
   }
 });
@@ -4061,7 +4070,7 @@ function previouslyCompared(a, b) {
 /*!*****************************************************!*\
   !*** ./node_modules/apollo-boost/lib/bundle.esm.js ***!
   \*****************************************************/
-/*! exports provided: HttpLink, gql, default, ApolloClient, ApolloError, FetchType, NetworkStatus, ObservableQuery, isApolloError, Observable, getOperationName, ApolloLink, concat, createOperation, empty, execute, from, fromError, fromPromise, makePromise, split, toPromise, HeuristicFragmentMatcher, InMemoryCache, IntrospectionFragmentMatcher, ObjectCache, StoreReader, StoreWriter, WriteError, assertIdValue, defaultDataIdFromObject, defaultNormalizedCacheFactory, enhanceErrorWithDocument */
+/*! exports provided: ApolloClient, ApolloError, FetchType, NetworkStatus, ObservableQuery, isApolloError, Observable, getOperationName, ApolloLink, concat, createOperation, empty, execute, from, fromError, fromPromise, makePromise, split, toPromise, HeuristicFragmentMatcher, InMemoryCache, IntrospectionFragmentMatcher, ObjectCache, StoreReader, StoreWriter, WriteError, assertIdValue, defaultDataIdFromObject, defaultNormalizedCacheFactory, enhanceErrorWithDocument, HttpLink, gql, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -35837,6 +35846,37 @@ exports.getRouteRegex = getRouteRegex;
 
 /***/ }),
 
+/***/ "./node_modules/next-server/dist/lib/runtime-config.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/next-server/dist/lib/runtime-config.js ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime-corejs2/helpers/interopRequireDefault */ "./node_modules/@babel/runtime-corejs2/helpers/interopRequireDefault.js");
+
+var _defineProperty = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-property */ "./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js"));
+
+(0, _defineProperty["default"])(exports, "__esModule", {
+  value: true
+});
+var runtimeConfig;
+
+exports["default"] = function () {
+  return runtimeConfig;
+};
+
+function setConfig(configValue) {
+  runtimeConfig = configValue;
+}
+
+exports.setConfig = setConfig;
+
+/***/ }),
+
 /***/ "./node_modules/next-server/dist/lib/side-effect.js":
 /*!**********************************************************!*\
   !*** ./node_modules/next-server/dist/lib/side-effect.js ***!
@@ -61477,7 +61517,7 @@ var partitionHTMLProps = function partitionHTMLProps(props) {
 /*!*************************************************************!*\
   !*** ./node_modules/semantic-ui-react/dist/es/lib/index.js ***!
   \*************************************************************/
-/*! exports provided: AutoControlledComponent, getChildMapping, mergeChildMappings, childrenUtils, useKeyOnly, useKeyOrValueAndKey, useValueAndKey, useMultipleProp, useTextAlignProp, useVerticalAlignProp, useWidthProp, customPropTypes, eventStack, getUnhandledProps, getElementType, htmlInputAttrs, htmlInputEvents, htmlInputProps, htmlImageProps, partitionHTMLProps, isBrowser, doesNodeContainClick, leven, createPaginationItems, SUI, numberToWordMap, numberToWord, normalizeOffset, normalizeTransitionDuration, objectDiff, handleRef, isRefObject, createShorthand, createShorthandFactory, createHTMLDivision, createHTMLIframe, createHTMLImage, createHTMLInput, createHTMLLabel, createHTMLParagraph */
+/*! exports provided: AutoControlledComponent, getChildMapping, mergeChildMappings, childrenUtils, useKeyOnly, useKeyOrValueAndKey, useValueAndKey, useMultipleProp, useTextAlignProp, useVerticalAlignProp, useWidthProp, customPropTypes, eventStack, createShorthand, createShorthandFactory, createHTMLDivision, createHTMLIframe, createHTMLImage, createHTMLInput, createHTMLLabel, createHTMLParagraph, getUnhandledProps, getElementType, htmlInputAttrs, htmlInputEvents, htmlInputProps, htmlImageProps, partitionHTMLProps, isBrowser, doesNodeContainClick, leven, createPaginationItems, SUI, numberToWordMap, numberToWord, normalizeOffset, normalizeTransitionDuration, objectDiff, handleRef, isRefObject */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
