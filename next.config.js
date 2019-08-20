@@ -1,8 +1,9 @@
 const { parsed: localEnv } = require('dotenv').config()
-
+const config =  { // Will be available on both server and client
+  apiURL: localEnv.API_HOST,
+  clientURL: localEnv.CLIENT_HOST
+}
 module.exports = {
-  publicRuntimeConfig: { // Will be available on both server and client
-    apiURL: localEnv.API_HOST,
-    clientURL: localEnv.CLIENT_HOST
-  }
+  serverRuntimeConfig: config,
+  publicRuntimeConfig: config
 }
