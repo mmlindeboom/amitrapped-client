@@ -34,7 +34,7 @@ const Login = ({ token }) => {
   if (token) {
     Router.push('/home')
   }
-  if (data && data.login.token) {
+  if (data && data.login) {
     loginReadyFor(data.login.token)
   }
 

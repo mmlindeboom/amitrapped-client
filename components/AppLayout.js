@@ -28,12 +28,12 @@ const LOGOUT_USER = gql`
 `
 
 
-export default function({ children }) {
+export default function({ client, children }) {
   const [logOutUser, {loggedOut}] = useMutation(LOGOUT_USER)
 
   const handleLogout = () => {
     logOutUser()
-    logout()
+    logout(client)
   }
   if (loggedOut) console.log('loggedOut')
 

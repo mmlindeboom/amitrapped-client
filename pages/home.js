@@ -26,20 +26,17 @@ import { GET_USER } from '../data/user'
 
 
 const Home = (props => {
-  const {loading, error, data } = useQuery(GET_USER)
+  const {client, loading, error, data: { user } } = useQuery(GET_USER)
 
   let firstName = ''
 
   if (loading) {
     return <AppLayout><Dimmer><Loader></Loader></Dimmer></AppLayout>
   }
-  if (data && data.user) firstName = data.user.firstName
-  if (error) {
-    console.log(error)
-  }
+  if (user) firstName = user.firstName
 
   return (
-    <AppLayout>
+    <AppLayout client={client}>
       <Header size="huge">Let's start here, {firstName}</Header>
       <Header>The Plan</Header>
       <Step.Group>
