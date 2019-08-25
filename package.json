@@ -30,6 +30,7 @@
     "react": "^16.9.0",
     "react-apollo": "^2.5.8",
     "react-dom": "^16.8.6",
+    "react-motion": "^0.5.2",
     "semantic-ui-react": "^0.87.3"
   }
 }

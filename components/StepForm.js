@@ -8,8 +8,7 @@ import {
   Form,
   FormGroup,
   Radio,
-  Segment,
-  Transition
+  Segment
 } from 'semantic-ui-react'
 import Visible from '../components/Visible'
 
@@ -28,31 +27,31 @@ const StepForm = ({ id, value, prompt, index, show, step, handleChange}) => {
                     control={Radio}
                     label='Strongly Disagree'
                     value={1}
-                    onChange={(e, {value}) => handleChange(id, value)}
+                    onChange={(e, {value}) => (e.preventDefault && handleChange(id, value, index))}
                     defaultChecked={value === 1}/>
                   <Form.Field
                     control={Radio}
                     label='Disagree'
                     value={2}
-                    onChange={(e, {value}) => handleChange(id, value)}
+                    onChange={(e, {value}) => handleChange(id, value, index)}
                     defaultChecked={value === 2}/>
                   <Form.Field
                     control={Radio}
                     label="I don't know"
                     value={3}
-                    onChange={(e, {value}) => handleChange(id, value)}
+                    onChange={(e, {value}) => handleChange(id, value, index)}
                     defaultChecked={value === 3}/>
                   <Form.Field
                     control={Radio}
                     label="Agree"
                     value={4}
-                    onChange={(e, {value}) => handleChange(id, value)}
+                    onChange={(e, {value}) => handleChange(id, value, index)}
                     defaultChecked={value === 4}/>
                   <Form.Field
                     control={Radio}
                     label="Strongly Agree"
                     value={5}
-                    onChange={(e, {value}) => handleChange(id, value)}
+                    onChange={(e, {value}) => handleChange(id, value, index)}
                     defaultChecked={value === 5}/>
                 </FormGroup>
               </Form>
@@ -60,10 +59,7 @@ const StepForm = ({ id, value, prompt, index, show, step, handleChange}) => {
           </Grid>
         </Segment>
       {index > 0 && <Button onClick={() => step((index - 1) || 0)}>Prev</Button>}
-      <Button onClick={() => step(index + 1)}
-              primary={Number.isInteger(value)}
-              negative={value===null}
-              basic>{value ? 'Next' : 'Skip'}</Button>
+      {value && <Button onClick={() => step(index + 1)} primary>Next</Button>}
     </Visible>
   )
 }

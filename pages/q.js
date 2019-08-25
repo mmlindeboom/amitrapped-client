@@ -13,24 +13,26 @@ import { UPDATE_ANSWER } from '../data/quiz'
 import QuizLayout from '../components/layouts/QuizLayout'
 import StepForm from '../components/StepForm'
 
-const calcPercent = (completed, total) => (completed/total) * 100
+const calcPercent = (completed, total) => parseInt((completed/total) * 100)
 
 const q = (props => {
   const {loading, error, data: { user } }= useQuery(GET_PLACEMENTS)
-  const [updateAnswer] = useMutation(UPDATE_ANSWER)
+  const [updateAnswer, {...updatingAnswer}] = useMutation(UPDATE_ANSWER)
 
   const [step, setStep] = useState(0)
   const [questions, updateAnswers] = useState([])
   const [percentComplete, setPercent] = useState(0)
-  let name = 'Home'
-  const handleAnswerUpdate = async (id, value) => {
+  const [name, setName] = useState('Home')
+
+  const handleAnswerUpdate = async (id, value, index) => {
     const { data } = await updateAnswer({ variables: {id: id, value: value}})
     const {reply: {completed, answers}} = data.updateAnswer
 
     updateAnswers(answers)
-    setStep(completed)
     setPercent(calcPercent(completed, answers.length))
+    setStep(index + 1)
   }
+
   if (error) {
     return <div>{error.message}</div>
   }
@@ -38,29 +40,33 @@ const q = (props => {
   useEffect(() => {
     // Load initial data
     if (user && !questions.length) {
-      setStep(user.reply.completed)
       updateAnswers(user.reply.answers)
       setPercent(calcPercent(user.reply.completed, user.reply.answers.length))
-      name = user.firstName
+      setName(user.firstName)
+      setStep(user.reply.completed)
     }
-  })
+  }, [user])
 
-
+  const done = step === questions.length
   return (
     <QuizLayout name={ name }>
       <Grid style={{minHeight: '500px'}}>
         <Grid.Column verticalAlign="middle">
-          { (loading) && <Dimmer active inverted><Loader></Loader></Dimmer> }
-          { questions.map((answer, i) => <StepForm prompt={ answer.placement.prompt }
-                                          index={i}
-                                          show={step === i}
+          { (loading || updatingAnswer.loading) && <Dimmer active inverted><Loader></Loader></Dimmer> }
+          { done && <p>Done!</p>}
+          { !done && questions.slice(step-1, step).map((answer, i) => <StepForm prompt={ answer.placement.prompt }
+                                          index={step}
+                                          show={true}
                                           handleChange={handleAnswerUpdate}
-                                          key={Math.random()}
+                                          key={step}
                                           step={setStep}
                                           {...answer} />)}
         </Grid.Column>
       </Grid>
-      <Progress percent={percentComplete} size="small"></Progress>
+      { !done && <Progress percent={percentComplete}
+                           progress
+                           size="small"
+                           color="olive"></Progress> }
     </QuizLayout>
   )
 })
