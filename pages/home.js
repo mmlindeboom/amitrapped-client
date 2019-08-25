@@ -19,7 +19,7 @@ import {
   Sidebar,
   Visibility,
 } from 'semantic-ui-react'
-import withData from '../lib/apollo'
+import Link from 'next/link'
 import AppLayout from '../components/AppLayout'
 import { withAuthSync } from '../lib/auth'
 import { GET_USER } from '../data/user'
@@ -43,11 +43,17 @@ const Home = (props => {
       <Header>The Plan</Header>
       <Step.Group>
         <Step link>
-          <Icon name='mail' />
-          <Step.Content>
-            <Step.Title>Quiz</Step.Title>
-            <Step.Description>Take your quiz</Step.Description>
-          </Step.Content>
+          <Link href="/q">
+            <a>
+              <Icon name='mail' />
+              <Step.Content>
+
+                  <Step.Title>Quiz</Step.Title>
+
+                <Step.Description>Take your quiz</Step.Description>
+              </Step.Content>
+            </a>
+          </Link>
         </Step>
 
         <Step link disabled>
@@ -93,4 +99,4 @@ const Home = (props => {
   )
 })
 
-export default withData(withAuthSync(Home))
+export default withAuthSync(Home)

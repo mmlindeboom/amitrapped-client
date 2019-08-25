@@ -29,9 +29,7 @@ const LOGOUT_USER = gql`
 
 
 export default function({ client, children }) {
-  const [logOutUser, {loggedOut}] = useMutation(LOGOUT_USER, {
-    notifyOnNetworkStatusChange: true
-  })
+  const [logOutUser, {loggedOut}] = useMutation(LOGOUT_USER)
 
   if (loggedOut) console.log('loggedOut')
 

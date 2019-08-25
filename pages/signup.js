@@ -1,11 +1,10 @@
 import React from 'react';
-import withData from '../lib/apollo'
 import Layout from '../components/Layout'
 import SignupForm from '../components/SignupForm'
 
 
 
-export default withData(props => {
+export default (props) => {
   return (
     <div>
       <Layout>
@@ -13,4 +12,4 @@ export default withData(props => {
       </Layout>
     </div>
   )
-});
+};
