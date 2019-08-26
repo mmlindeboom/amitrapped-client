@@ -6,13 +6,14 @@ const Visible = ({show, children}) => {
 
   return (
     <Motion
-      defaultStyle={{ opacity: show ? 1 : 0, y: 5}}
-      style={{ opacity: spring(show ? 1 : 0, {stiffness: 140}), y: spring(0, {stiffness: 140})}}
+      defaultStyle={{ opacity: show ? 1 : 0, y: -5}}
+      style={{ opacity: spring(show ? 1 : 0, {stiffness: 160}), y: spring(0)}}
     >
       {({opacity, y}) => {
         const transform = toCSS(y)
         return <div style={{
                   opacity: opacity,
+                  backfaceVisibility: 'hidden',
                   ...transform}}>{children}</div>}}
     </Motion>
 

@@ -14,7 +14,12 @@ import QuizLayout from '../components/layouts/QuizLayout'
 import StepForm from '../components/StepForm'
 
 const calcPercent = (completed, total) => parseInt((completed/total) * 100)
+const slice = (array, step) => {
+  if (step === 0) return [array[0]]
+  if (step < 0) return []
 
+  return array.slice(step-1, step)
+}
 const q = (props => {
   const {loading, error, data: { user } }= useQuery(GET_PLACEMENTS)
   const [updateAnswer, {...updatingAnswer}] = useMutation(UPDATE_ANSWER)
@@ -43,9 +48,9 @@ const q = (props => {
       updateAnswers(user.reply.answers)
       setPercent(calcPercent(user.reply.completed, user.reply.answers.length))
       setName(user.firstName)
-      setStep(user.reply.completed)
+      setStep(user.reply.completed || 0)
     }
-  }, [user])
+  })
 
   const done = step === questions.length
   return (
@@ -54,11 +59,11 @@ const q = (props => {
         <Grid.Column verticalAlign="middle">
           { (loading || updatingAnswer.loading) && <Dimmer active inverted><Loader></Loader></Dimmer> }
           { done && <p>Done!</p>}
-          { !done && questions.slice(step-1, step).map((answer, i) => <StepForm prompt={ answer.placement.prompt }
+          { !done && slice(questions, step).map((answer, i) => <StepForm prompt={ answer.placement.prompt }
                                           index={step}
                                           show={true}
                                           handleChange={handleAnswerUpdate}
-                                          key={step}
+                                          key={Math.random()}
                                           step={setStep}
                                           {...answer} />)}
         </Grid.Column>
