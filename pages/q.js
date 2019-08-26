@@ -14,7 +14,7 @@ import QuizLayout from '../components/layouts/QuizLayout'
 import StepForm from '../components/StepForm'
 
 const calcPercent = (completed, total) => parseInt((completed/total) * 100)
-const slice = (array, step) => {
+const isolateStep = (array, step) => {
   if (step === 0) return [array[0]]
   if (step < 0) return []
 
@@ -59,7 +59,7 @@ const q = (props => {
         <Grid.Column verticalAlign="middle">
           { (loading || updatingAnswer.loading) && <Dimmer active inverted><Loader></Loader></Dimmer> }
           { done && <p>Done!</p>}
-          { !done && slice(questions, step).map((answer, i) => <StepForm prompt={ answer.placement.prompt }
+          { !done && isolateStep(questions, step).map((answer, i) => <StepForm prompt={ answer.placement.prompt }
                                           index={step}
                                           show={true}
                                           handleChange={handleAnswerUpdate}
