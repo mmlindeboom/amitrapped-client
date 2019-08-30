@@ -55,7 +55,7 @@ const Home = (props => {
             <Steps toGo={toGo}></Steps>
           </Grid.Column>
         </Grid.Row>
-        <Grid.Row>
+        <Grid.Row columns={2}>
           <Grid.Column>
             <Header>What you can do right now</Header>
             <Segment>
@@ -80,8 +80,33 @@ const Home = (props => {
               </Item.Group>
             </Segment>
           </Grid.Column>
-        </Grid.Row>
+          <Grid.Column>
+            <Header>What are the digital traps?</Header>
+            <Segment>
+                <Item.Group divided>
+                  <Item>
+                    <Item.Image size='mini' src='/static/forest.jpg' />
+                    <Item.Content>
+                      <Item.Header>Header</Item.Header>
+                      <Item.Description>
+                        Description
+                      </Item.Description>
+                    </Item.Content>
+                  </Item>
+                  <Item>
+                    <Item.Image size='mini' src='/static/forest.jpg' />
+                    <Item.Content>
+                      <Item.Header>Header</Item.Header>
+                      <Item.Description>
+                        Description
+                    </Item.Description>
+                  </Item.Content>
+                </Item>
+              </Item.Group>
 
+            </Segment>
+          </Grid.Column>
+        </Grid.Row>
       </Grid>
     </AppLayout>
   )
