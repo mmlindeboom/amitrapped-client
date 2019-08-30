@@ -19,11 +19,11 @@ import {
   Sidebar,
   Visibility,
 } from 'semantic-ui-react'
-import Link from 'next/link'
 import AppLayout from '../components/AppLayout'
 import Steps from '../components/Steps'
 import { withAuthSync } from '../lib/auth'
 import { GET_USER } from '../data/user'
+import Router from 'next/router';
 
 // TODO: Undo hardcoding of this number
 const QUESTIONS_COUNT = 48
@@ -70,7 +70,7 @@ const Home = (props => {
                       Lorem ipsum
                     </Item.Description>
                     <Item.Extra>
-                      <Button primary floated='right'>
+                      <Button primary floated='right' onClick={() => Router.push('/q')}>
                         Take Quiz
                         <Icon name='right chevron' />
                       </Button>
@@ -103,7 +103,6 @@ const Home = (props => {
                   </Item.Content>
                 </Item>
               </Item.Group>
-
             </Segment>
           </Grid.Column>
         </Grid.Row>

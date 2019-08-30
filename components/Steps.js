@@ -7,13 +7,11 @@ import Router from 'next/router'
 
 const Steps = ({toGo}) => {
   return (
-    <Step.Group>
-      <Step link onClick={() => Router.push('/q')}>
-        <Icon name='check' />
+    <Step.Group size="small">
+      <Step active color="teal" invert onClick={() => Router.push('/q')}>
+        <Icon name='check circle outline' color="grey" size="mini" />
         <Step.Content>
-
-            <Step.Title>{toGo > 0 ? 'Complete' : 'Take'} the quiz</Step.Title>
-
+            <Step.Title color="teal">{toGo > 0 ? 'Complete' : 'Take'} the quiz</Step.Title>
           <Label color="teal" floating>{toGo}%</Label>
         </Step.Content>
       </Step>
