@@ -23,38 +23,48 @@ const StepForm = ({ id, value, prompt, index, show, step, handleChange}) => {
               <Grid.Column width={15}>
                 <Header as="h3">{prompt}</Header>
                 <Form>
-                  <FormGroup inline>
-                    <Form.Field
-                      control={Radio}
-                      label='Strongly Disagree'
-                      value={1}
-                      onChange={(e, {value}) => (e.preventDefault && handleChange(id, value, index))}
-                      defaultChecked={value === 1}/>
-                    <Form.Field
-                      control={Radio}
-                      label='Disagree'
-                      value={2}
-                      onChange={(e, {value}) => handleChange(id, value, index)}
-                      defaultChecked={value === 2}/>
-                    <Form.Field
-                      control={Radio}
-                      label="I don't know"
-                      value={3}
-                      onChange={(e, {value}) => handleChange(id, value, index)}
-                      defaultChecked={value === 3}/>
-                    <Form.Field
-                      control={Radio}
-                      label="Agree"
-                      value={4}
-                      onChange={(e, {value}) => handleChange(id, value, index)}
-                      defaultChecked={value === 4}/>
-                    <Form.Field
-                      control={Radio}
-                      label="Strongly Agree"
-                      value={5}
-                      onChange={(e, {value}) => handleChange(id, value, index)}
-                      defaultChecked={value === 5}/>
-                  </FormGroup>
+                    <Grid doubling stackable columns={5}>
+                      <Grid.Column>
+                        <Form.Field
+                          control={Radio}
+                          label='Strongly Disagree'
+                          value={1}
+                          onChange={(e, {value}) => (e.preventDefault && handleChange(id, value, index))}
+                          defaultChecked={value === 1}/>
+                      </Grid.Column>
+                      <Grid.Column>
+                        <Form.Field
+                          control={Radio}
+                          label='Disagree'
+                          value={2}
+                          onChange={(e, {value}) => handleChange(id, value, index)}
+                          defaultChecked={value === 2}/>
+                      </Grid.Column>
+                      <Grid.Column>
+                        <Form.Field
+                          control={Radio}
+                          label="I don't know"
+                          value={3}
+                          onChange={(e, {value}) => handleChange(id, value, index)}
+                          defaultChecked={value === 3}/>
+                      </Grid.Column>
+                      <Grid.Column>
+                        <Form.Field
+                          control={Radio}
+                          label="Agree"
+                          value={4}
+                          onChange={(e, {value}) => handleChange(id, value, index)}
+                          defaultChecked={value === 4}/>
+                      </Grid.Column>
+                      <Grid.Column>
+                        <Form.Field
+                          control={Radio}
+                          label="Strongly Agree"
+                          value={5}
+                          onChange={(e, {value}) => handleChange(id, value, index)}
+                          defaultChecked={value === 5}/>
+                      </Grid.Column>
+                    </Grid>
                 </Form>
               </Grid.Column>
             </Grid>

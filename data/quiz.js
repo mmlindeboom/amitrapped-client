@@ -1,23 +1,20 @@
 import { gql } from 'apollo-boost'
 
 export const GET_PLACEMENTS = gql`
-  {
-    user {
-      firstName
-      reply {
-        token,
-        complete,
-        completed,
-        answers {
-          value
-          id
-          placement {
-            prompt
-          }
+  query {
+    reply {
+      token,
+      complete,
+      completed,
+      answers {
+        value
+        id
+        placement {
+          prompt
         }
       }
     }
- }
+  }
 `
 
 

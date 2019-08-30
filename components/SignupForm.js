@@ -37,7 +37,7 @@ const SignupForm = ({ token }) => {
   const {inputs, handleChange, handleSubmit} = useLoginForm(() => signup({variables: inputs}))
 
   if (data && data.signUp.token) {
-    loginReadyFor(data.signUp.token)
+    loginReadyFor(data.signUp.token, {welcomePage: true})
   }
 
   return (

@@ -21,80 +21,68 @@ import {
 } from 'semantic-ui-react'
 import Link from 'next/link'
 import AppLayout from '../components/AppLayout'
+import Steps from '../components/Steps'
 import { withAuthSync } from '../lib/auth'
 import { GET_USER } from '../data/user'
 
-
+// TODO: Undo hardcoding of this number
+const QUESTIONS_COUNT = 48
 const Home = (props => {
   const {client, loading, error, data} = useQuery(GET_USER)
 
   let firstName = ''
+  let toGo = 0
+
   if (error) {
     return <div>{error.message}</div>
   }
   if (loading) {
     return <AppLayout><Dimmer><Loader></Loader></Dimmer></AppLayout>
   }
-  if (data && data.user) firstName = data.user.firstName
+  if (data && data.user) {
+    firstName = data.user.firstName
+    toGo =  parseInt((data.user.reply.completed/QUESTIONS_COUNT)*100)
+  }
 
   return (
     <AppLayout client={client}>
       <Header size="huge">Let's start here, {firstName}</Header>
-      <Header>The Plan</Header>
-      <Step.Group>
-        <Step link>
-          <Link href="/q">
-            <a>
-              <Icon name='mail' />
-              <Step.Content>
 
-                  <Step.Title>Quiz</Step.Title>
+      <Grid celled="internally" relaxed>
+        <Grid.Row stretched>
+          <Grid.Column>
+            <Header>The Plan</Header>
+            <Steps toGo={toGo}></Steps>
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row>
+          <Grid.Column>
+            <Header>What you can do right now</Header>
+            <Segment>
+              <Item.Group>
+                <Item>
+                  <Item.Image size='tiny' src='/static/forest.jpg' />
 
-                <Step.Description>Take your quiz</Step.Description>
-              </Step.Content>
-            </a>
-          </Link>
-        </Step>
+                  <Item.Content>
+                    <Item.Header as='a'>Take your quiz!</Item.Header>
+                    <Item.Meta>It's the next step</Item.Meta>
+                    <Item.Description>
+                      Lorem ipsum
+                    </Item.Description>
+                    <Item.Extra>
+                      <Button primary floated='right'>
+                        Take Quiz
+                        <Icon name='right chevron' />
+                      </Button>
+                    </Item.Extra>
+                  </Item.Content>
+                </Item>
+              </Item.Group>
+            </Segment>
+          </Grid.Column>
+        </Grid.Row>
 
-        <Step link disabled>
-          <Icon name='eye' />
-          <Step.Content>
-            <Step.Title>Review your traps</Step.Title>
-            <Step.Description>Your traps will tell you the future</Step.Description>
-          </Step.Content>
-        </Step>
-
-        <Step link disabled>
-          <Icon name='heart' />
-          <Step.Content>
-            <Step.Title>Take action</Step.Title>
-          </Step.Content>
-        </Step>
-      </Step.Group>
-
-      <Header>What you can do right now</Header>
-      <Segment>
-        <Item.Group>
-          <Item>
-            <Item.Image size='tiny' src='/static/forest.jpg' />
-
-            <Item.Content>
-              <Item.Header as='a'>Take your quiz!</Item.Header>
-              <Item.Meta>It's the next step</Item.Meta>
-              <Item.Description>
-                Lorem ipsum
-              </Item.Description>
-              <Item.Extra>
-                <Button primary floated='right'>
-                   Take Quiz
-                  <Icon name='right chevron' />
-                </Button>
-              </Item.Extra>
-            </Item.Content>
-          </Item>
-        </Item.Group>
-      </Segment>
-
+      </Grid>
     </AppLayout>
   )
 })

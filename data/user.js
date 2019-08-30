@@ -6,6 +6,7 @@ export const GET_USER = gql`
       firstName
       reply {
         token
+        completed
       }
     }
   }
@@ -22,6 +23,7 @@ export const SIGNUP_USER = gql`
   mutation signUp($email: String!, $password: String!, $passwordConfirmation: String!, $firstName: String!, $lastName: String!) {
     signUp(email: $email, password: $password, passwordConfirmation: $passwordConfirmation, firstName: $firstName, lastName: $lastName) {
       token
+      firstName
     }
   }
 `

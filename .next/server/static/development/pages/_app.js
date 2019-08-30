@@ -134,12 +134,14 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement;
 
 
 const getToken = () => js_cookie__WEBPACK_IMPORTED_MODULE_7___default.a.get('token');
-async function loginReadyFor(token) {
+async function loginReadyFor(token, options = {}) {
+  let redirect = '/home';
+  if (options['welcomePage']) redirect = '/landing';
   return new _babel_runtime_corejs2_core_js_promise__WEBPACK_IMPORTED_MODULE_4___default.a(res => {
     js_cookie__WEBPACK_IMPORTED_MODULE_7___default.a.set('token', token, {
       expires: 1
     });
-    res(next_router__WEBPACK_IMPORTED_MODULE_6___default.a.replace('/home'));
+    res(next_router__WEBPACK_IMPORTED_MODULE_6___default.a.replace(redirect));
   });
 }
 function logout(client) {
@@ -157,10 +159,12 @@ const withAuthSync = WrappedComponent => {
 
   return _temp = _class = class extends react__WEBPACK_IMPORTED_MODULE_5__["Component"] {
     static async getInitialProps(ctx) {
+      const client = ctx.apolloClient;
       const token = auth(ctx);
       const componentProps = WrappedComponent.getInitialProps && (await WrappedComponent.getInitialProps(ctx));
       return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, componentProps, {
-        token
+        token,
+        client
       });
     }
 
@@ -189,7 +193,7 @@ const withAuthSync = WrappedComponent => {
       return __jsx(WrappedComponent, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, this.props, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 59
+          lineNumber: 64
         },
         __self: this
       }));
@@ -245,7 +249,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // Cache seems to crapout might need to use next-with-apollo
 
 const {
   publicRuntimeConfig,
@@ -276,6 +279,7 @@ const httpLink = new apollo_boost__WEBPACK_IMPORTED_MODULE_1__["HttpLink"]({
   headers,
   initialState
 }) => new apollo_client__WEBPACK_IMPORTED_MODULE_0___default.a({
+  ssr: true,
   link: authLink.concat(httpLink),
   cache: new apollo_boost__WEBPACK_IMPORTED_MODULE_1__["InMemoryCache"]().restore(initialState || {}),
   connectToDevTools: true

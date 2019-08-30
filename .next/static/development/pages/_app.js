@@ -68,18 +68,24 @@ function _loginReadyFor() {
   _loginReadyFor = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_12__["default"])(
   /*#__PURE__*/
   _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_2___default.a.mark(function _callee2(token) {
+    var options,
+        redirect,
+        _args2 = arguments;
     return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_2___default.a.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
+            options = _args2.length > 1 && _args2[1] !== undefined ? _args2[1] : {};
+            redirect = '/home';
+            if (options['welcomePage']) redirect = '/landing';
             return _context2.abrupt("return", new _babel_runtime_corejs2_core_js_promise__WEBPACK_IMPORTED_MODULE_0___default.a(function (res) {
               js_cookie__WEBPACK_IMPORTED_MODULE_15___default.a.set('token', token, {
                 expires: 1
               });
-              res(next_router__WEBPACK_IMPORTED_MODULE_14___default.a.replace('/home'));
+              res(next_router__WEBPACK_IMPORTED_MODULE_14___default.a.replace(redirect));
             }));
 
-          case 1:
+          case 4:
           case "end":
             return _context2.stop();
         }
@@ -115,32 +121,34 @@ var withAuthSync = function withAuthSync(WrappedComponent) {
         var _getInitialProps = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_12__["default"])(
         /*#__PURE__*/
         _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_2___default.a.mark(function _callee(ctx) {
-          var token, componentProps;
+          var client, token, componentProps;
           return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_2___default.a.wrap(function _callee$(_context) {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
+                  client = ctx.apolloClient;
                   token = auth(ctx);
                   _context.t0 = WrappedComponent.getInitialProps;
 
                   if (!_context.t0) {
-                    _context.next = 6;
+                    _context.next = 7;
                     break;
                   }
 
-                  _context.next = 5;
+                  _context.next = 6;
                   return WrappedComponent.getInitialProps(ctx);
 
-                case 5:
+                case 6:
                   _context.t0 = _context.sent;
 
-                case 6:
+                case 7:
                   componentProps = _context.t0;
                   return _context.abrupt("return", Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_3__["default"])({}, componentProps, {
-                    token: token
+                    token: token,
+                    client: client
                   }));
 
-                case 8:
+                case 9:
                 case "end":
                   return _context.stop();
               }
@@ -191,7 +199,7 @@ var withAuthSync = function withAuthSync(WrappedComponent) {
         return __jsx(WrappedComponent, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({}, this.props, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 59
+            lineNumber: 64
           },
           __self: this
         }));
@@ -245,7 +253,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // Cache seems to crapout might need to use next-with-apollo
+
 
 var _getConfig = next_config__WEBPACK_IMPORTED_MODULE_4___default()(),
     publicRuntimeConfig = _getConfig.publicRuntimeConfig,
@@ -275,6 +283,7 @@ var httpLink = new apollo_boost__WEBPACK_IMPORTED_MODULE_1__["HttpLink"]({
       headers = _ref2.headers,
       initialState = _ref2.initialState;
   return new apollo_client__WEBPACK_IMPORTED_MODULE_0__["default"]({
+    ssr: true,
     link: authLink.concat(httpLink),
     cache: new apollo_boost__WEBPACK_IMPORTED_MODULE_1__["InMemoryCache"]().restore(initialState || {}),
     connectToDevTools: true
@@ -321,8 +330,8 @@ var ApolloProvider = function (_a) {
     var ApolloContext = getApolloContext();
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ApolloContext.Consumer, null, function (context) {
         if (context === void 0) { context = {}; }
-        if (client) {
-            context.client = client;
+        if (client && context.client !== client) {
+            context = Object.assign({}, context, { client: client });
         }
          false ? undefined : Object(ts_invariant__WEBPACK_IMPORTED_MODULE_1__["invariant"])(context.client, 'ApolloProvider was not passed a client instance. Make ' +
             'sure you pass in your client via the "client" prop.');
@@ -420,15 +429,14 @@ function parser(document) {
 /*!*****************************************************************!*\
   !*** ./node_modules/@apollo/react-hooks/lib/react-hooks.esm.js ***!
   \*****************************************************************/
-/*! exports provided: ApolloConsumer, ApolloProvider, getApolloContext, resetApolloContext, getDataFromTree, getMarkupFromTree, renderToStringWithData, useApolloClient, useMutation, useQuery, useSubscription */
+/*! exports provided: ApolloConsumer, ApolloProvider, getApolloContext, resetApolloContext, RenderPromises, useApolloClient, useLazyQuery, useMutation, useQuery, useSubscription */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDataFromTree", function() { return getDataFromTree; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getMarkupFromTree", function() { return getMarkupFromTree; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "renderToStringWithData", function() { return renderToStringWithData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RenderPromises", function() { return RenderPromises; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useApolloClient", function() { return useApolloClient; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useLazyQuery", function() { return useLazyQuery; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useMutation", function() { return useMutation; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useQuery", function() { return useQuery; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useSubscription", function() { return useSubscription; });
@@ -445,7 +453,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var apollo_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! apollo-client */ "./node_modules/apollo-client/bundle.esm.js");
-/* harmony import */ var apollo_utilities__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! apollo-utilities */ "./node_modules/apollo-utilities/lib/bundle.esm.js");
+/* harmony import */ var _wry_equality__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wry/equality */ "./node_modules/@wry/equality/lib/equality.esm.js");
 /* harmony import */ var ts_invariant__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ts-invariant */ "./node_modules/ts-invariant/lib/invariant.esm.js");
 
 
@@ -457,7 +465,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var OperationData = (function () {
     function OperationData(options, context) {
-        this.isMounted = true;
+        this.isMounted = false;
         this.previousOptions = {};
         this.context = {};
         this.options = {};
@@ -468,7 +476,7 @@ var OperationData = (function () {
         return this.options;
     };
     OperationData.prototype.setOptions = function (newOptions) {
-        if (!Object(apollo_utilities__WEBPACK_IMPORTED_MODULE_4__["isEqual"])(this.options, newOptions)) {
+        if (!Object(_wry_equality__WEBPACK_IMPORTED_MODULE_4__["equal"])(this.options, newOptions)) {
             this.previousOptions = this.options;
         }
         this.options = newOptions;
@@ -510,11 +518,21 @@ var QueryData = (function (_super) {
         var _this = _super.call(this, options, context) || this;
         _this.previousData = {};
         _this.currentObservable = {};
+        _this.runLazy = false;
+        _this.runLazyQuery = function (options) {
+            _this.runLazy = true;
+            _this.lazyOptions = options;
+            _this.forceUpdate();
+        };
+        _this.getExecuteResult = function () {
+            var result = _this.getQueryResult();
+            _this.startQuerySubscription();
+            return result;
+        };
         _this.forceUpdate = forceUpdate;
         return _this;
     }
     QueryData.prototype.execute = function () {
-        var _this = this;
         this.refreshClient();
         var _a = this.getOptions(), skip = _a.skip, query = _a.query;
         if (skip || query !== this.previousData.query) {
@@ -522,15 +540,22 @@ var QueryData = (function (_super) {
             this.previousData.query = query;
         }
         this.updateObservableQuery();
-        if (!skip) {
+        if (this.isMounted)
             this.startQuerySubscription();
-        }
-        var finish = function () { return _this.getQueryResult(); };
-        if (this.context && this.context.renderPromises) {
-            var result = this.context.renderPromises.addQueryPromise(this, finish);
-            return result || { loading: true, networkStatus: apollo_client__WEBPACK_IMPORTED_MODULE_3__["NetworkStatus"].loading };
-        }
-        return finish();
+        return this.getExecuteSsrResult() || this.getExecuteResult();
+    };
+    QueryData.prototype.executeLazy = function () {
+        return !this.runLazy
+            ? [
+                this.runLazyQuery,
+                {
+                    loading: false,
+                    networkStatus: apollo_client__WEBPACK_IMPORTED_MODULE_3__["NetworkStatus"].ready,
+                    called: false,
+                    data: undefined
+                }
+            ]
+            : [this.runLazyQuery, this.execute()];
     };
     QueryData.prototype.fetchData = function () {
         if (this.getOptions().skip)
@@ -546,23 +571,51 @@ var QueryData = (function (_super) {
         if (this.context && this.context.renderPromises) {
             this.context.renderPromises.registerSSRObservable(obs, this.getOptions());
         }
-        var result = this.currentObservable.query.getCurrentResult();
-        return result.loading ? obs.result() : false;
+        var currentResult = this.currentObservable.query.getCurrentResult();
+        return currentResult.loading ? obs.result() : false;
     };
-    QueryData.prototype.afterExecute = function () {
+    QueryData.prototype.afterExecute = function (_a) {
+        var _this = this;
+        var _b = (_a === void 0 ? {} : _a).lazy, lazy = _b === void 0 ? false : _b;
         this.isMounted = true;
-        this.handleErrorOrCompleted();
+        if (!lazy || this.runLazy) {
+            this.handleErrorOrCompleted();
+            setTimeout(function () {
+                _this.currentObservable.query &&
+                    _this.currentObservable.query.resetQueryStoreErrors();
+            });
+        }
         return this.unmount.bind(this);
     };
     QueryData.prototype.cleanup = function () {
         this.removeQuerySubscription();
-        this.currentObservable.query = null;
-        this.previousData.result = null;
+        delete this.currentObservable.query;
+        delete this.previousData.result;
     };
-    QueryData.prototype.updateCurrentData = function () {
-        if (this.isMounted) {
-            this.forceUpdate();
+    QueryData.prototype.getOptions = function () {
+        var options = _super.prototype.getOptions.call(this);
+        var lazyOptions = this.lazyOptions || {};
+        var updatedOptions = Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({}, options, { variables: Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({}, options.variables, lazyOptions.variables), context: Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({}, options.context, lazyOptions.context) });
+        if (this.runLazy) {
+            delete updatedOptions.skip;
         }
+        return updatedOptions;
+    };
+    QueryData.prototype.getExecuteSsrResult = function () {
+        var result;
+        var ssrLoading = {
+            loading: true,
+            networkStatus: apollo_client__WEBPACK_IMPORTED_MODULE_3__["NetworkStatus"].loading,
+            called: true,
+            data: {}
+        };
+        if (this.context && this.context.renderPromises) {
+            result = this.context.renderPromises.addQueryPromise(this, this.getExecuteResult);
+            if (!result) {
+                result = ssrLoading;
+            }
+        }
+        return result;
     };
     QueryData.prototype.prepareObservableQueryOptions = function () {
         this.verifyDocumentType(this.getOptions().query, _apollo_react_common__WEBPACK_IMPORTED_MODULE_0__["DocumentType"].Query);
@@ -595,7 +648,7 @@ var QueryData = (function (_super) {
             this.initializeObservableQuery();
         }
         var newObservableQueryOptions = Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({}, this.prepareObservableQueryOptions(), { children: null });
-        if (!Object(apollo_utilities__WEBPACK_IMPORTED_MODULE_4__["isEqual"])(newObservableQueryOptions, this.previousData.observableQueryOptions)) {
+        if (!Object(_wry_equality__WEBPACK_IMPORTED_MODULE_4__["equal"])(newObservableQueryOptions, this.previousData.observableQueryOptions)) {
             this.previousData.observableQueryOptions = newObservableQueryOptions;
             this.currentObservable
                 .query.setOptions(newObservableQueryOptions)
@@ -604,7 +657,7 @@ var QueryData = (function (_super) {
     };
     QueryData.prototype.startQuerySubscription = function () {
         var _this = this;
-        if (this.currentObservable.subscription)
+        if (this.currentObservable.subscription || this.getOptions().skip)
             return;
         var obsQuery = this.currentObservable.query;
         this.currentObservable.subscription = obsQuery.subscribe({
@@ -613,16 +666,16 @@ var QueryData = (function (_super) {
                 if (_this.previousData.result &&
                     _this.previousData.result.loading === loading &&
                     _this.previousData.result.networkStatus === networkStatus &&
-                    Object(apollo_utilities__WEBPACK_IMPORTED_MODULE_4__["isEqual"])(_this.previousData.result.data, data || {})) {
+                    Object(_wry_equality__WEBPACK_IMPORTED_MODULE_4__["equal"])(_this.previousData.result.data, data || {})) {
                     return;
                 }
-                _this.updateCurrentData();
+                _this.forceUpdate();
             },
             error: function (error) {
                 _this.resubscribeToQuery();
                 if (!error.hasOwnProperty('graphQLErrors'))
                     throw error;
-                _this.updateCurrentData();
+                _this.forceUpdate();
             }
         });
     };
@@ -638,13 +691,12 @@ var QueryData = (function (_super) {
         });
     };
     QueryData.prototype.getQueryResult = function () {
-        var _this = this;
         var result = {
             data: Object.create(null)
         };
         Object.assign(result, this.observableQueryFields(this.currentObservable.query));
         if (this.getOptions().skip) {
-            result = Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({}, result, { data: undefined, error: undefined, loading: false });
+            result = Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({}, result, { data: undefined, error: undefined, loading: false, called: true });
         }
         else {
             var currentResult = this.currentObservable.query.getCurrentResult();
@@ -654,7 +706,7 @@ var QueryData = (function (_super) {
             if (errors && errors.length > 0) {
                 error = new apollo_client__WEBPACK_IMPORTED_MODULE_3__["ApolloError"]({ graphQLErrors: errors });
             }
-            Object.assign(result, { loading: loading, networkStatus: networkStatus, error: error });
+            Object.assign(result, { loading: loading, networkStatus: networkStatus, error: error, called: true });
             if (loading) {
                 var previousData = this.previousData.result
                     ? this.previousData.result.data
@@ -684,9 +736,6 @@ var QueryData = (function (_super) {
                 Object.assign(result.data, data);
             }
         }
-        setTimeout(function () {
-            _this.currentObservable.query.resetQueryStoreErrors();
-        });
         result.client = this.client;
         this.previousData.loading =
             (this.previousData.result && this.previousData.result.loading) || false;
@@ -699,8 +748,8 @@ var QueryData = (function (_super) {
             var _b = this.getOptions(), query = _b.query, variables = _b.variables, onCompleted = _b.onCompleted, onError = _b.onError;
             if (this.previousOptions &&
                 !this.previousData.loading &&
-                Object(apollo_utilities__WEBPACK_IMPORTED_MODULE_4__["isEqual"])(this.previousOptions.query, query) &&
-                Object(apollo_utilities__WEBPACK_IMPORTED_MODULE_4__["isEqual"])(this.previousOptions.variables, variables)) {
+                Object(_wry_equality__WEBPACK_IMPORTED_MODULE_4__["equal"])(this.previousOptions.query, query) &&
+                Object(_wry_equality__WEBPACK_IMPORTED_MODULE_4__["equal"])(this.previousOptions.variables, variables)) {
                 return;
             }
             if (onCompleted && !error) {
@@ -720,26 +769,49 @@ var QueryData = (function (_super) {
     return QueryData;
 }(OperationData));
 
-function useQuery(query, options) {
+function useDeepMemo(memoFn, key) {
+    var ref = Object(react__WEBPACK_IMPORTED_MODULE_2__["useRef"])();
+    if (!ref.current || !Object(_wry_equality__WEBPACK_IMPORTED_MODULE_4__["equal"])(key, ref.current.key)) {
+        ref.current = { key: key, value: memoFn() };
+    }
+    return ref.current.value;
+}
+
+function useBaseQuery(query, options, lazy) {
+    if (lazy === void 0) { lazy = false; }
     var context = Object(react__WEBPACK_IMPORTED_MODULE_2__["useContext"])(Object(_apollo_react_common__WEBPACK_IMPORTED_MODULE_0__["getApolloContext"])());
-    var _a = Object(react__WEBPACK_IMPORTED_MODULE_2__["useReducer"])(function (x) { return x + 1; }, 0), _ignored = _a[0], forceUpdate = _a[1];
+    var _a = Object(react__WEBPACK_IMPORTED_MODULE_2__["useReducer"])(function (x) { return x + 1; }, 0), tick = _a[0], forceUpdate = _a[1];
     var updatedOptions = options ? Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({}, options, { query: query }) : { query: query };
     var queryDataRef = Object(react__WEBPACK_IMPORTED_MODULE_2__["useRef"])();
-    function getQueryDataRef() {
-        if (!queryDataRef.current) {
-            queryDataRef.current = new QueryData({
-                options: updatedOptions,
-                context: context,
-                forceUpdate: forceUpdate
-            });
-        }
-        return queryDataRef.current;
+    if (!queryDataRef.current) {
+        queryDataRef.current = new QueryData({
+            options: updatedOptions,
+            context: context,
+            forceUpdate: forceUpdate
+        });
     }
-    var queryData = getQueryDataRef();
+    var queryData = queryDataRef.current;
     queryData.setOptions(updatedOptions);
     queryData.context = context;
-    Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () { return queryData.afterExecute(); });
-    return queryData.execute();
+    var memo = {
+        options: updatedOptions,
+        context: context,
+        tick: tick
+    };
+    var result = useDeepMemo(function () { return (lazy ? queryData.executeLazy() : queryData.execute()); }, memo);
+    Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () { return queryData.afterExecute({ lazy: lazy }); }, [result]);
+    Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () {
+        return function () { return queryData.cleanup(); };
+    }, []);
+    return result;
+}
+
+function useQuery(query, options) {
+    return useBaseQuery(query, options, false);
+}
+
+function useLazyQuery(query, options) {
+    return useBaseQuery(query, options, true);
 }
 
 var MutationData = (function (_super) {
@@ -747,6 +819,21 @@ var MutationData = (function (_super) {
     function MutationData(_a) {
         var options = _a.options, context = _a.context, result = _a.result, setResult = _a.setResult;
         var _this = _super.call(this, options, context) || this;
+        _this.runMutation = function (mutationFunctionOptions) {
+            if (mutationFunctionOptions === void 0) { mutationFunctionOptions = {}; }
+            _this.onMutationStart();
+            var mutationId = _this.generateNewMutationId();
+            return _this.mutate(mutationFunctionOptions)
+                .then(function (response) {
+                _this.onMutationCompleted(response, mutationId);
+                return response;
+            })
+                .catch(function (error) {
+                _this.onMutationError(error, mutationId);
+                if (!_this.getOptions().onError)
+                    throw error;
+            });
+        };
         _this.verifyDocumentType(options.mutation, _apollo_react_common__WEBPACK_IMPORTED_MODULE_0__["DocumentType"].Mutation);
         _this.result = result;
         _this.setResult = setResult;
@@ -754,32 +841,15 @@ var MutationData = (function (_super) {
         return _this;
     }
     MutationData.prototype.execute = function (result) {
-        var _this = this;
+        this.isMounted = true;
         this.verifyDocumentType(this.getOptions().mutation, _apollo_react_common__WEBPACK_IMPORTED_MODULE_0__["DocumentType"].Mutation);
-        var runMutation = function (options) { return _this.runMutation(options); };
-        return [runMutation, result];
+        return [this.runMutation, result];
     };
     MutationData.prototype.afterExecute = function () {
         this.isMounted = true;
         return this.unmount.bind(this);
     };
     MutationData.prototype.cleanup = function () {
-    };
-    MutationData.prototype.runMutation = function (mutationFunctionOptions) {
-        var _this = this;
-        if (mutationFunctionOptions === void 0) { mutationFunctionOptions = {}; }
-        this.onMutationStart();
-        var mutationId = this.generateNewMutationId();
-        return this.mutate(mutationFunctionOptions)
-            .then(function (response) {
-            _this.onMutationCompleted(response, mutationId);
-            return response;
-        })
-            .catch(function (error) {
-            _this.onMutationError(error, mutationId);
-            if (!_this.getOptions().onError)
-                throw error;
-        });
     };
     MutationData.prototype.mutate = function (mutationFunctionOptions) {
         var _a = this.getOptions(), mutation = _a.mutation, variables = _a.variables, optimisticResponse = _a.optimisticResponse, update = _a.update, _b = _a.context, mutationContext = _b === void 0 ? {} : _b, _c = _a.awaitRefetchQueries, awaitRefetchQueries = _c === void 0 ? false : _c, fetchPolicy = _a.fetchPolicy;
@@ -841,7 +911,7 @@ var MutationData = (function (_super) {
     };
     MutationData.prototype.updateResult = function (result) {
         if (this.isMounted &&
-            (!this.previousResult || !Object(apollo_utilities__WEBPACK_IMPORTED_MODULE_4__["isEqual"])(this.previousResult, result))) {
+            (!this.previousResult || !Object(_wry_equality__WEBPACK_IMPORTED_MODULE_4__["equal"])(this.previousResult, result))) {
             this.setResult(result);
             this.previousResult = result;
         }
@@ -895,7 +965,7 @@ var SubscriptionData = (function (_super) {
             this.previousOptions &&
             Object.keys(this.previousOptions).length > 0 &&
             (this.previousOptions.subscription !== this.getOptions().subscription ||
-                !Object(apollo_utilities__WEBPACK_IMPORTED_MODULE_4__["isEqual"])(this.previousOptions.variables, this.getOptions().variables))) {
+                !Object(_wry_equality__WEBPACK_IMPORTED_MODULE_4__["equal"])(this.previousOptions.variables, this.getOptions().variables))) {
             this.endSubscription();
             delete this.currentObservable.query;
             currentResult = this.getLoadingResult();
@@ -907,7 +977,6 @@ var SubscriptionData = (function (_super) {
     };
     SubscriptionData.prototype.afterExecute = function () {
         this.isMounted = true;
-        return this.unmount.bind(this);
     };
     SubscriptionData.prototype.cleanup = function () {
         this.endSubscription();
@@ -1002,6 +1071,7 @@ function useSubscription(subscription, options) {
     subscriptionData.setOptions(updatedOptions);
     subscriptionData.context = context;
     Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () { return subscriptionData.afterExecute(); });
+    Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () { return subscriptionData.cleanup.bind(subscriptionData); }, []);
     return subscriptionData.execute(result);
 }
 
@@ -1066,33 +1136,6 @@ var RenderPromises = (function () {
     };
     return RenderPromises;
 }());
-function getDataFromTree(tree, context) {
-    if (context === void 0) { context = {}; }
-    return getMarkupFromTree({
-        tree: tree,
-        context: context,
-        renderFunction: __webpack_require__(/*! react-dom/server */ "./node_modules/react-dom/server.browser.js").renderToStaticMarkup
-    });
-}
-function getMarkupFromTree(_a) {
-    var tree = _a.tree, _b = _a.context, context = _b === void 0 ? {} : _b, _c = _a.renderFunction, renderFunction = _c === void 0 ? __webpack_require__(/*! react-dom/server */ "./node_modules/react-dom/server.browser.js").renderToStaticMarkup : _c;
-    var renderPromises = new RenderPromises();
-    function process() {
-        var ApolloContext = Object(_apollo_react_common__WEBPACK_IMPORTED_MODULE_0__["getApolloContext"])();
-        var html = renderFunction(react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(ApolloContext.Provider, { value: Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({}, context, { renderPromises: renderPromises }) }, tree));
-        return renderPromises.hasPromises()
-            ? renderPromises.consumeAndAwaitPromises().then(process)
-            : html;
-    }
-    return Promise.resolve().then(process);
-}
-
-function renderToStringWithData(component) {
-    return getMarkupFromTree({
-        tree: component,
-        renderFunction: __webpack_require__(/*! react-dom/server */ "./node_modules/react-dom/server.browser.js").renderToString
-    });
-}
 
 
 //# sourceMappingURL=react-hooks.esm.js.map
