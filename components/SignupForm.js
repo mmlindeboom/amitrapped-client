@@ -12,7 +12,8 @@ const useLoginForm = (callback) => {
                                     email: '',
                                     password: '',
                                     passwordConfirmation: '',
-                                    firstName: ''
+                                    firstName: '',
+                                    lastName: ''
                                   })
   const handleSubmit = (e) => {
     if (e) e.preventDefault()
@@ -54,7 +55,7 @@ const SignupForm = ({ token }) => {
           </Header>
 
           <Form size='large' onSubmit={handleSubmit}>
-            <Segment basic>
+            <Segment stacked>
               <Form.Input fluid icon='user' iconPosition='left'
                 placeholder='E-mail address'
                 name="email"
@@ -87,6 +88,15 @@ const SignupForm = ({ token }) => {
                 iconPosition='left'
                 placeholder='First Name'
                 name='firstName'
+                value={inputs.firstName}
+                onChange={handleChange}
+              />
+              <Form.Input
+                fluid
+                icon='address card outline'
+                iconPosition='left'
+                placeholder='Last Name'
+                name='lastName'
                 value={inputs.firstName}
                 onChange={handleChange}
               />
