@@ -97,7 +97,7 @@ const SignupForm = ({ token }) => {
                 iconPosition='left'
                 placeholder='Last Name'
                 name='lastName'
-                value={inputs.firstName}
+                value={inputs.lastName}
                 onChange={handleChange}
               />
               <Button color='teal' fluid size='large' type="submit">
