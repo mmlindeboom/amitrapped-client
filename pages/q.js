@@ -4,12 +4,16 @@ import { withAuthSync } from '../lib/auth'
 import { GET_PLACEMENTS, UPDATE_ANSWER } from '../data/quiz'
 import { GET_USER } from '../data/user'
 import {
+  Button,
   Dimmer,
   Loader,
+  Header,
+  Icon,
   Progress,
   Grid,
-  Transition
+  Segment
 } from 'semantic-ui-react'
+import Router from 'next/router'
 
 import QuizLayout from '../components/layouts/QuizLayout'
 import StepForm from '../components/StepForm'
@@ -67,7 +71,16 @@ const q = (({client}) => {
       <Grid style={{minHeight: '325px'}}>
         <Grid.Column verticalAlign="middle">
           { (loading || answerReq.loading) && <Dimmer active inverted><Loader></Loader></Dimmer> }
-          { done && <p>Done!</p>}
+          { done && (
+            <Segment placeholder>
+              <Header color="olive" icon>
+                <Icon name="check"></Icon>
+                Finished!
+                <Header.Subheader>Now it's time to checkout your Traps</Header.Subheader>
+              </Header>
+              <Button primary onClick={() => Router.push('/traps')}>Show me my digital traps</Button>
+            </Segment>
+          )}
           { !done && isolateStep(questions, step).map((answer, i) => <StepForm prompt={ answer.placement.prompt }
                                           index={step}
                                           show={true}
@@ -77,7 +90,7 @@ const q = (({client}) => {
                                           {...answer} />)}
         </Grid.Column>
       </Grid>
-      { !done && <Progress percent={percentComplete}
+      {<Progress percent={percentComplete}
                            progress
                            size="small"
                            color="olive"></Progress> }

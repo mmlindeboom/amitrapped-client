@@ -12,8 +12,7 @@ const useLoginForm = (callback) => {
                                     email: '',
                                     password: '',
                                     passwordConfirmation: '',
-                                    firstName: '',
-                                    lastName: ''
+                                    firstName: ''
                                   })
   const handleSubmit = (e) => {
     if (e) e.preventDefault()
@@ -48,14 +47,14 @@ const SignupForm = ({ token }) => {
       {loading &&
         <Dimmer><Loader></Loader></Dimmer>
       }
-      <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+      <Grid textAlign='center'>
         <Grid.Column style={{ maxWidth: 450 }}>
           <Header as='h2' color='teal' textAlign='center'>
             Create an account
           </Header>
 
           <Form size='large' onSubmit={handleSubmit}>
-            <Segment stacked>
+            <Segment basic>
               <Form.Input fluid icon='user' iconPosition='left'
                 placeholder='E-mail address'
                 name="email"
@@ -91,17 +90,6 @@ const SignupForm = ({ token }) => {
                 value={inputs.firstName}
                 onChange={handleChange}
               />
-              <Form.Input
-                fluid
-                icon='address card outline'
-                iconPosition='left'
-                placeholder='Last Name'
-                name='lastName'
-                value={inputs.lastName}
-                onChange={handleChange}
-              />
-
-
               <Button color='teal' fluid size='large' type="submit">
                 I'm ready to take the quiz!
               </Button>
