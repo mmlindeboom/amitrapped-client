@@ -17,7 +17,6 @@ export const GET_PLACEMENTS = gql`
   }
 `
 
-
 export const UPDATE_ANSWER = gql`
   mutation updateAnswer($id: ID!, $value: Int!) {
     updateAnswer(id: $id, value: $value) {

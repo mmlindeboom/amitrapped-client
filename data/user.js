@@ -11,6 +11,15 @@ export const GET_USER = gql`
     }
   }
 `
+
+export const USER_TRAPS = gql`
+  query {
+    userTraps {
+      name
+      description
+    }
+  }
+`
 export const AUTHENTICATE_USER = gql`
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {

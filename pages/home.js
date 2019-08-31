@@ -1,58 +1,58 @@
 import { useQuery } from '@apollo/react-hooks'
+import { useState, useEffect } from 'react'
+import Router from 'next/router'
 import {
-  Container as Card,
   Button,
   Dimmer,
-  Divider,
   Grid,
   Header,
   Icon,
   Item,
-  Image,
-  List,
   Loader,
-  Menu,
-  Responsive,
-  Segment,
-  Step,
-  Rail,
-  Sidebar,
-  Visibility,
+  Segment
 } from 'semantic-ui-react'
-import AppLayout from '../components/AppLayout'
-import Steps from '../components/Steps'
 import { withAuthSync } from '../lib/auth'
 import { GET_USER } from '../data/user'
-import Router from 'next/router';
+import todos from '../data/todos'
+import AppLayout from '../components/AppLayout'
+import Steps from '../components/Steps'
+import Visible from '../components/Visible'
+
+
 
 // TODO: Undo hardcoding of this number
 const QUESTIONS_COUNT = 48
-const Home = (props => {
-  const {client, loading, error, data} = useQuery(GET_USER)
-
-  let firstName = ''
-  let toGo = 0
+const Home = (({client}) => {
+  const {loading, error, data} = useQuery(GET_USER)
+  const [userState, setUserState] = useState({name: '', percentComplete: 0})
+  const [todo, setTodo] = useState(todos['incomplete'])
 
   if (error) {
     return <div>{error.message}</div>
   }
-  if (loading) {
-    return <AppLayout><Dimmer><Loader></Loader></Dimmer></AppLayout>
-  }
-  if (data && data.user) {
-    firstName = data.user.firstName
-    toGo =  parseInt((data.user.reply.completed/QUESTIONS_COUNT)*100)
-  }
+
+  useEffect(() => {
+    if (data && data.user) {
+      let percent = parseInt((data.user.reply.completed/QUESTIONS_COUNT)*100)
+      let status = percent < 100 ? 'incomplete' : 'complete'
+      setUserState({
+        name: data.user.firstName,
+        percentComplete: percent
+      })
+      setTodo(todos[status])
+    }
+  }, [data])
 
   return (
     <AppLayout client={client}>
-      <Header size="huge">Let's start here, {firstName}</Header>
+      <Header size="huge">Let's start here, {userState.name}</Header>
 
       <Grid celled="internally" relaxed>
+        {loading && <Dimmer active inverted><Loader></Loader></Dimmer>}
         <Grid.Row stretched>
           <Grid.Column>
             <Header>The Plan</Header>
-            <Steps toGo={toGo}></Steps>
+            <Steps percentComplete={userState.percentComplete}></Steps>
           </Grid.Column>
         </Grid.Row>
         <Grid.Row columns={2}>
@@ -62,16 +62,15 @@ const Home = (props => {
               <Item.Group>
                 <Item>
                   <Item.Image size='tiny' src='/static/forest.jpg' />
-
                   <Item.Content>
-                    <Item.Header as='a'>Take your quiz!</Item.Header>
-                    <Item.Meta>It's the next step</Item.Meta>
+                    <Item.Header as='a'>{todo.header}</Item.Header>
+                    <Item.Meta>{todo.meta}</Item.Meta>
                     <Item.Description>
-                      Lorem ipsum
+                      {todo.description}
                     </Item.Description>
                     <Item.Extra>
-                      <Button primary floated='right' onClick={() => Router.push('/q')}>
-                        Take Quiz
+                      <Button primary floated='right' onClick={() => Router.push(todo.url)}>
+                        {todo.cta}
                         <Icon name='right chevron' />
                       </Button>
                     </Item.Extra>

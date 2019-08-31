@@ -16,10 +16,11 @@ import StepForm from '../components/StepForm'
 
 const calcPercent = (completed, total) => parseInt((completed/total) * 100)
 const isolateStep = (array, step) => {
-  if (step === 0 && array.length) return [array[0]]
+  const clonedArray = array
+  if (step === 0 && clonedArray.length) return [clonedArray[0]]
   if (step < 0) return []
 
-  return array.slice(step-1, step)
+  return clonedArray.slice(step, step+1)
 }
 
 const q = (({client}) => {
@@ -38,7 +39,7 @@ const q = (({client}) => {
 
     updateAnswers(answers)
     setPercent(calcPercent(completed, answers.length))
-    setStep(index + 1)
+    setStep(index+1)
   }
 
   if (error) {
@@ -51,7 +52,6 @@ const q = (({client}) => {
       setName(user.firstName)
     }
     if (reply && !questions.length) {
-      console.log(reply)
       updateAnswers(reply.answers)
       setPercent(calcPercent(reply.completed, reply.answers.length))
       setStep(reply.completed || 0)
@@ -61,6 +61,7 @@ const q = (({client}) => {
 
 
   const done = (questions.length && step === questions.length)
+
   return (
     <QuizLayout name={ name }>
       <Grid style={{minHeight: '325px'}}>

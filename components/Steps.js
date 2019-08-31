@@ -5,17 +5,20 @@ import {
 } from 'semantic-ui-react'
 import Router from 'next/router'
 
-const Steps = ({toGo}) => {
+const Steps = ({percentComplete}) => {
+  const quizIncomplete = percentComplete < 100
   return (
     <Step.Group size="small">
-      <Step active color="teal" invert onClick={() => Router.push('/q')}>
-        <Icon name='check circle outline' color="grey" size="mini" />
+      <Step active={quizIncomplete} color="teal" disabled={!quizIncomplete} onClick={() => Router.push('/q')}>
+        {quizIncomplete && <Icon name='check circle outline' color="grey" size="mini" />}
+        {!quizIncomplete && <Icon name='check' color="green" size="mini" />}
         <Step.Content>
-            <Step.Title color="teal">{toGo > 0 ? 'Complete' : 'Take'} the quiz</Step.Title>
-          <Label color="teal" floating>{toGo}%</Label>
+          <Step.Title color="teal">{percentComplete > 0 ? 'Complete' : 'Take'} the quiz</Step.Title>
+          {quizIncomplete && <Label color="teal" floating>{percentComplete}%</Label>}
         </Step.Content>
       </Step>
-      <Step link disabled>
+      <Step active={!quizIncomplete} link disabled={quizIncomplete}
+                                          onClick={() => !quizIncomplete ? Router.push('/traps') : false}>
         <Icon name='eye' />
         <Step.Content>
           <Step.Title>Review your traps</Step.Title>

@@ -1,6 +1,7 @@
 import React from 'react';
 import Head from 'next/head'
 import { Container } from 'next/app'
+import Router from 'next/router'
 import {
   Card,
   Button,
@@ -29,7 +30,7 @@ const LOGOUT_USER = gql`
 `
 
 
-export default function({ client, children }) {
+export default function({ client, page, children }) {
   const [logOutUser, {loggedOut}] = useMutation(LOGOUT_USER)
 
   if (loggedOut) console.log('loggedOut')
@@ -43,6 +44,7 @@ export default function({ client, children }) {
     maxWidth: '1024px',
     margin: '0 auto'
   }
+
   return (
     <Container>
       <Head>
@@ -53,13 +55,13 @@ export default function({ client, children }) {
         <link rel="icon" type="image/x-icon" href="../static/favicon.ico" />
       </Head>
       <Menu attached="top" color="teal" inverted>
-        <Menu.Item>
+        <Menu.Item onClick={() => Router.push('/home')}>
           <Header color="white" inverted>
             <Image src="/static/logo.png" size="mini" style={{margin: 0}} />
             <Header.Content>Identify Your Traps</Header.Content>
           </Header>
         </Menu.Item>
-
+        {page && <Menu.Item active><Icon name="angle right" style={{position: 'absolute', left: -8}}></Icon>{page}</Menu.Item>}
         <Menu.Menu position="right">
           <Dropdown item simple icon="setting">
             <Dropdown.Menu>
