@@ -16,12 +16,9 @@ import { GET_USER } from '../data/user'
 import todos from '../data/todos'
 import AppLayout from '../components/AppLayout'
 import Steps from '../components/Steps'
-import Visible from '../components/Visible'
-
-
 
 // TODO: Undo hardcoding of this number
-const QUESTIONS_COUNT = 48
+const QUESTIONS_COUNT = 31
 const Home = (({client}) => {
   const {loading, error, data} = useQuery(GET_USER)
   const [userState, setUserState] = useState({name: '', percentComplete: 0})
