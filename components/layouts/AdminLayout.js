@@ -8,7 +8,7 @@ import Router from 'next/router'
 
 
 export default function({ client, children }) {
-  const [active, setActive] = useState('traps')
+  const [active, setActive] = useState('edit')
 
   const handleClick = (name) => {
     setActive(name)
@@ -23,9 +23,9 @@ export default function({ client, children }) {
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
       </Head>
       <Menu fixed='top' fluid>
-        <Menu.Item name='Dashboard' active={active === 'dashboard'}></Menu.Item>
-        <Menu.Item name='Questions' active={active === 'questions'}></Menu.Item>
-        <Menu.Item name='Traps' active={active === 'traps'} onClick={() => handleClick('traps')}></Menu.Item>
+        <Menu.Item name='Dashboard' disabled></Menu.Item>
+        {/* <Menu.Item name='Questions' active={active === 'questions'}></Menu.Item> */}
+        <Menu.Item name='Edit' active={active === 'edit'} onClick={() => handleClick('edit')}></Menu.Item>
       </Menu>
       <Grid style={{ width: '1200px' }} padded verticalAlign='middle'>
         <Grid.Column>

@@ -47,7 +47,7 @@ const EditTrapForm = ({trap}) => {
                   onChange={(e) => setDescription(e.target.value)}></Form.TextArea>
                 <Form.Group>
                   <Button onClick={() => setEditing(false)}>Cancel</Button>
-                  <Form.Field control={Button} primary>Update</Form.Field>
+                  <Form.Field control={Button} primary>Save</Form.Field>
                 </Form.Group>
 
               </Form>

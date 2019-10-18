@@ -1,8 +1,8 @@
 import { useQuery } from '@apollo/react-hooks'
 import {
   Dimmer,
+  Menu,
   Grid,
-  Divider,
   Loader,
 } from 'semantic-ui-react'
 import AdminLayout from '../../components/layouts/AdminLayout'
@@ -15,6 +15,12 @@ const Dashboard = (client => {
   return (
     <AdminLayout client={client}>
       {loading && <Dimmer><Loader></Loader></Dimmer>}
+      <Menu tabular>
+        <Menu.Item>Quiz</Menu.Item>
+        <Menu.Item active>Traps</Menu.Item>
+        <Menu.Item disabled>Questions</Menu.Item>
+        <Menu.Item disabled>Pillars</Menu.Item>
+      </Menu>
        <Grid relaxed celled='internally' style={{maxWidth: '1024px', margin: '0 auto'}}>
         {userTraps && userTraps.map(trap => (
           <Grid.Row>

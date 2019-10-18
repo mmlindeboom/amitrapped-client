@@ -64,6 +64,7 @@ export default function({ client, page, children }) {
         <Menu.Menu position="right">
           <Dropdown item simple icon="setting">
             <Dropdown.Menu>
+            <Dropdown.Item onClick={() => Router.push('/admin/edit')}><Icon name="lock"></Icon>Admin</Dropdown.Item>
               <Dropdown.Item onClick={handleLogout}><Icon name="hand victory"></Icon>Logout</Dropdown.Item>
 
             </Dropdown.Menu>

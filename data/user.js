@@ -22,6 +22,10 @@ export const USER_TRAPS = gql`
       pillar {
         name
       }
+      questions {
+        id
+        prompt
+      }
     }
   }
 `
