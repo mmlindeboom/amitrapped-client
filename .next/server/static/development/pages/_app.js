@@ -206,6 +206,7 @@ const auth = ctx => {
   const {
     token
   } = next_cookies__WEBPACK_IMPORTED_MODULE_8___default()(ctx);
+  debugger;
 
   if (ctx.req && !token) {
     ctx.res.writeHead(302, {

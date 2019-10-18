@@ -214,6 +214,8 @@ var auth = function auth(ctx) {
   var _nextCookie = next_cookies__WEBPACK_IMPORTED_MODULE_16___default()(ctx),
       token = _nextCookie.token;
 
+  debugger;
+
   if (ctx.req && !token) {
     ctx.res.writeHead(302, {
       Location: '/'

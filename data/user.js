@@ -4,6 +4,7 @@ export const GET_USER = gql`
   query {
     user {
       firstName
+      admin
       reply {
         token
         completed
@@ -15,8 +16,12 @@ export const GET_USER = gql`
 export const USER_TRAPS = gql`
   query {
     userTraps {
+      id
       name
       description
+      pillar {
+        name
+      }
     }
   }
 `

@@ -12,11 +12,11 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/home": [
+    "/admin/traps": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/traps": [
+    "/home": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]

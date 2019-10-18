@@ -31,9 +31,8 @@ const LOGOUT_USER = gql`
 
 
 export default function({ client, page, children }) {
-  const [logOutUser, {loggedOut}] = useMutation(LOGOUT_USER)
+  const [logOutUser] = useMutation(LOGOUT_USER)
 
-  if (loggedOut) console.log('loggedOut')
 
   const handleLogout = () => {
     logOutUser()
@@ -66,6 +65,7 @@ export default function({ client, page, children }) {
           <Dropdown item simple icon="setting">
             <Dropdown.Menu>
               <Dropdown.Item onClick={handleLogout}><Icon name="hand victory"></Icon>Logout</Dropdown.Item>
+
             </Dropdown.Menu>
           </Dropdown>
         </Menu.Menu>

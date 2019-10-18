@@ -27,11 +27,10 @@ import Router from 'next/router';
 
 // TODO: Undo hardcoding of this number
 const QUESTIONS_COUNT = 48
-const Dashboard = (props => {
+const Dashboard = (client => {
   return (
-    <AdminLayout>
+    <AdminLayout client={client}>
       <Segment placeholder>
-
         <Header icon><Icon name="wait"></Icon>Nothing here yet</Header>
       </Segment>
     </AdminLayout>

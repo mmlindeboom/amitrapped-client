@@ -1,12 +1,19 @@
 
 
-import React from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head'
 import { Container } from 'next/app'
-import { Grid, Breadcrumb, Rail, Menu } from 'semantic-ui-react'
-import Link from 'next/link'
+import { Container as Card, Grid, Menu } from 'semantic-ui-react'
+import Router from 'next/router'
 
-export default function({ name, children }) {
+
+export default function({ client, children }) {
+  const [active, setActive] = useState('traps')
+
+  const handleClick = (name) => {
+    setActive(name)
+    Router.push(`/admin/${name}`)
+  }
   return (
     <Container>
       <Head>
@@ -15,15 +22,13 @@ export default function({ name, children }) {
         <meta charSet="utf-8" />
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
       </Head>
-      <Grid style={{ height: '100vh', width: '100%' }} padded verticalAlign='middle'>
-        <Grid.Column width={3} stretched>
-          <Menu fluid vertical tabular>
-            <Menu.Item name='Dashboard' active></Menu.Item>
-            <Menu.Item name='Questions'></Menu.Item>
-            <Menu.Item name='Traps'></Menu.Item>
-          </Menu>
-        </Grid.Column>
-        <Grid.Column width={13}>
+      <Menu fixed='top' fluid>
+        <Menu.Item name='Dashboard' active={active === 'dashboard'}></Menu.Item>
+        <Menu.Item name='Questions' active={active === 'questions'}></Menu.Item>
+        <Menu.Item name='Traps' active={active === 'traps'} onClick={() => handleClick('traps')}></Menu.Item>
+      </Menu>
+      <Grid style={{ width: '1200px' }} padded verticalAlign='middle'>
+        <Grid.Column>
           {children}
         </Grid.Column>
       </Grid>
