@@ -76,7 +76,7 @@ function _loginReadyFor() {
         switch (_context2.prev = _context2.next) {
           case 0:
             options = _args2.length > 1 && _args2[1] !== undefined ? _args2[1] : {};
-            redirect = '/home';
+            redirect = '/';
             if (options['welcomePage']) redirect = '/landing';
             return _context2.abrupt("return", new _babel_runtime_corejs2_core_js_promise__WEBPACK_IMPORTED_MODULE_0___default.a(function (res) {
               js_cookie__WEBPACK_IMPORTED_MODULE_15___default.a.set('token', token, {
@@ -214,18 +214,16 @@ var auth = function auth(ctx) {
   var _nextCookie = next_cookies__WEBPACK_IMPORTED_MODULE_16___default()(ctx),
       token = _nextCookie.token;
 
-  debugger;
-
   if (ctx.req && !token) {
     ctx.res.writeHead(302, {
-      Location: '/'
+      Location: '/login'
     });
     ctx.res.end();
     return;
   }
 
   if (!token) {
-    next_router__WEBPACK_IMPORTED_MODULE_14___default.a.push('/');
+    next_router__WEBPACK_IMPORTED_MODULE_14___default.a.push('/login');
   }
 
   return token;

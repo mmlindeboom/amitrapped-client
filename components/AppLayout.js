@@ -54,7 +54,7 @@ export default function({ client, page, children }) {
         <link rel="icon" type="image/x-icon" href="../static/favicon.ico" />
       </Head>
       <Menu attached="top" color="teal" inverted>
-        <Menu.Item onClick={() => Router.push('/home')}>
+        <Menu.Item onClick={() => Router.push('/')}>
           <Header color="white" inverted>
             <Image src="/static/logo.png" size="mini" style={{margin: 0}} />
             <Header.Content>Identify Your Traps</Header.Content>

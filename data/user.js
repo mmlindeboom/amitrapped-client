@@ -8,6 +8,9 @@ export const GET_USER = gql`
       reply {
         token
         completed
+        quiz {
+          intro
+        }
       }
     }
   }

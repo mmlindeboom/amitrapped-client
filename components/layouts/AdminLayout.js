@@ -21,11 +21,11 @@ export default function({ client, children }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta charSet="utf-8" />
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
+        <link rel="stylesheet" href="//cdn.quilljs.com/1.2.6/quill.snow.css"></link>
       </Head>
-      <Menu fixed='top' fluid>
+      <Menu fixed='top' pointing fluid>
+        <Menu.Item name='Admin' active={active === 'edit'} onClick={() => handleClick('edit')}></Menu.Item>
         <Menu.Item name='Dashboard' disabled></Menu.Item>
-        {/* <Menu.Item name='Questions' active={active === 'questions'}></Menu.Item> */}
-        <Menu.Item name='Edit' active={active === 'edit'} onClick={() => handleClick('edit')}></Menu.Item>
       </Menu>
       <Grid style={{ width: '1200px' }} padded verticalAlign='middle'>
         <Grid.Column>

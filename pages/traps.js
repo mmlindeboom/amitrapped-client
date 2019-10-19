@@ -36,7 +36,7 @@ const Traps = (({client}) => {
         <Grid.Row>
           <Breadcrumb>
             <Breadcrumb.Section>
-              <Link href="/home"><a>Home</a></Link>
+              <Link href="/"><a>Home</a></Link>
             </Breadcrumb.Section>
             <Breadcrumb.Divider>/</Breadcrumb.Divider>
             <Breadcrumb.Section active>Traps Review</Breadcrumb.Section>

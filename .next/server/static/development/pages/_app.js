@@ -135,7 +135,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement;
 
 const getToken = () => js_cookie__WEBPACK_IMPORTED_MODULE_7___default.a.get('token');
 async function loginReadyFor(token, options = {}) {
-  let redirect = '/home';
+  let redirect = '/';
   if (options['welcomePage']) redirect = '/landing';
   return new _babel_runtime_corejs2_core_js_promise__WEBPACK_IMPORTED_MODULE_4___default.a(res => {
     js_cookie__WEBPACK_IMPORTED_MODULE_7___default.a.set('token', token, {
@@ -206,18 +206,17 @@ const auth = ctx => {
   const {
     token
   } = next_cookies__WEBPACK_IMPORTED_MODULE_8___default()(ctx);
-  debugger;
 
   if (ctx.req && !token) {
     ctx.res.writeHead(302, {
-      Location: '/'
+      Location: '/login'
     });
     ctx.res.end();
     return;
   }
 
   if (!token) {
-    next_router__WEBPACK_IMPORTED_MODULE_6___default.a.push('/');
+    next_router__WEBPACK_IMPORTED_MODULE_6___default.a.push('/login');
   }
 
   return token;

@@ -27,6 +27,17 @@ const isolateStep = (array, step) => {
   return clonedArray.slice(step, step+1)
 }
 
+const Intro = ({intro, begin}) => {
+return (
+        <Grid relaxed doubling stackable style={{textAlign: 'left', margin: '15px'}}>
+          <Grid.Column>
+            <h3 dangerouslySetInnerHTML={{ __html: intro }}></h3>
+            <Button primary onClick={() => begin(true)}>Begin</Button>
+          </Grid.Column>
+        </Grid>
+  )
+}
+
 const q = (({client}) => {
   const {data: {user}} = useQuery(GET_USER)
   const {loading, error, data: {reply}}= useQuery(GET_PLACEMENTS)
@@ -36,6 +47,8 @@ const q = (({client}) => {
   const [questions, updateAnswers] = useState([])
   const [percentComplete, setPercent] = useState(0)
   const [name, setName] = useState('Home')
+
+  const [introSeen, setIntroSeen] = useState(false)
 
   const handleAnswerUpdate = async (id, value, index) => {
     const { data } = await updateAnswer({ variables: {id: id, value: value}})
@@ -54,12 +67,14 @@ const q = (({client}) => {
     // set initial state
     if (user) {
       setName(user.firstName)
+      setIntroSeen(user.reply.completed > 0)
     }
     if (reply && !questions.length) {
       updateAnswers(reply.answers)
       setPercent(calcPercent(reply.completed, reply.answers.length))
       setStep(reply.completed || 0)
     }
+
   }, [user, reply])
 
 
@@ -81,7 +96,8 @@ const q = (({client}) => {
               <Button primary onClick={() => Router.push('/traps')}>Show me my digital traps</Button>
             </Segment>
           )}
-          { !done && isolateStep(questions, step).map((answer, i) => <StepForm prompt={ answer.placement.prompt }
+          { !introSeen && user && <Intro intro={user.reply.quiz.intro} begin={setIntroSeen}></Intro> }
+          { introSeen && !done && isolateStep(questions, step).map((answer, i) => <StepForm prompt={ answer.placement.prompt }
                                           index={step}
                                           show={true}
                                           handleChange={handleAnswerUpdate}
@@ -90,7 +106,7 @@ const q = (({client}) => {
                                           {...answer} />)}
         </Grid.Column>
       </Grid>
-      {<Progress percent={percentComplete}
+      {introSeen && <Progress percent={percentComplete}
                            progress
                            size="small"
                            color="olive"></Progress> }

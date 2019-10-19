@@ -7,3 +7,11 @@ export const UPDATE_TRAP = gql`
       description
     }
   }`
+
+  export const UPDATE_QUIZ = gql`
+  mutation updateQuiz($id: ID!, $intro: String!) {
+    updateQuiz(id: $id, intro: $intro) {
+      id
+      intro
+    }
+  }`

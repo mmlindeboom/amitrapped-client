@@ -21,7 +21,7 @@ export default function({ name, children }) {
           {name &&
             <Breadcrumb>
               <Breadcrumb.Section>
-                <Link href="/home"><a>{name}</a></Link>
+                <Link href="/"><a>{name}</a></Link>
               </Breadcrumb.Section>
               <Breadcrumb.Divider>/</Breadcrumb.Divider>
               <Breadcrumb.Section active>Quiz</Breadcrumb.Section>
