@@ -5,7 +5,8 @@ import {
   Item,
   Form,
   Loader,
-  Dimmer
+  Dimmer,
+  Segment
 } from 'semantic-ui-react'
 import { UPDATE_TRAP } from '../data/admin'
 
@@ -28,44 +29,44 @@ const EditTrapForm = ({trap}) => {
   }), [data])
 
   return (
-    <Item.Group>
-      <Item>
-        { loading && <Dimmer active inverted><Loader></Loader></Dimmer> }
-        <Item.Image size="small" src={`/static/traps/${name.toLowerCase().split(' ').join('-')}.png`}
-          onError={(e) => e.target.src='/static/traps/placeholder.jpg'}
-        />
+    <Segment stacked>
+      <Item.Group>
+        <Item>
+          { loading && <Dimmer active inverted><Loader></Loader></Dimmer> }
+          <Item.Image size="small" src={`/static/traps/${name.toLowerCase().split(' ').join('-')}.png`} />
 
-          {editing &&
-            <Item.Content verticalAlign="middle">
-              <Form onSubmit={handleSubmit}>
-                <Form.Input label="Name"
-                  defaultValue={name}
-                  onChange={(e) => setName(e.target.value)}></Form.Input>
-                <Form.TextArea label="Description"
-                  defaultValue={description}
-                  style={{ minHeight: 200 }}
-                  onChange={(e) => setDescription(e.target.value)}></Form.TextArea>
-                <Form.Group>
-                  <Button onClick={() => setEditing(false)}>Cancel</Button>
-                  <Form.Field control={Button} primary>Save</Form.Field>
-                </Form.Group>
+            {editing &&
+              <Item.Content verticalAlign="middle">
+                <Form onSubmit={handleSubmit}>
+                  <Form.Input label="Name"
+                    defaultValue={name}
+                    onChange={(e) => setName(e.target.value)}></Form.Input>
+                  <Form.TextArea label="Description"
+                    defaultValue={description}
+                    style={{ minHeight: 200 }}
+                    onChange={(e) => setDescription(e.target.value)}></Form.TextArea>
+                  <Form.Group>
+                    <Button onClick={() => setEditing(false)}>Cancel</Button>
+                    <Form.Field control={Button} primary>Save</Form.Field>
+                  </Form.Group>
 
-              </Form>
-            </Item.Content>
-          }
+                </Form>
+              </Item.Content>
+            }
 
-          {!editing &&
-            <Item.Content verticalAlign="middle">
-              <Item.Header>{name}</Item.Header>
-              <Item.Meta>Pillar: {trap.pillar.name}</Item.Meta>
-              <Item.Description>{description}</Item.Description>
-              <Item.Extra>
-                <Button primary onClick={() => setEditing(true)}>Edit</Button>
-              </Item.Extra>
-            </Item.Content>
-          }
-      </Item>
-    </Item.Group>
+            {!editing &&
+              <Item.Content verticalAlign="middle">
+                <Item.Header>{name}</Item.Header>
+                <Item.Meta>Pillar: {trap.pillar.name}</Item.Meta>
+                <Item.Description>{description}</Item.Description>
+                <Item.Extra>
+                  <Button primary onClick={() => setEditing(true)}>Edit</Button>
+                </Item.Extra>
+              </Item.Content>
+            }
+        </Item>
+      </Item.Group>
+    </Segment>
   )
 }
 

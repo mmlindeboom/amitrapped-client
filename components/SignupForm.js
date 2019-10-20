@@ -1,9 +1,9 @@
 import React from 'react';
 import { useMutation } from '@apollo/react-hooks'
-import { gql } from 'apollo-boost'
 import { useState } from 'react'
-import { Button, Dimmer, Loader, Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
+import { Button, Dimmer, Divider, Loader, Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
 import { Container } from 'next/app';
+import Link from 'next/link'
 import { loginReadyFor } from '../lib/auth'
 import { SIGNUP_USER } from '../data/user'
 
@@ -49,13 +49,13 @@ const SignupForm = ({ token }) => {
         <Dimmer><Loader></Loader></Dimmer>
       }
       <Grid textAlign='center'>
-        <Grid.Column style={{ maxWidth: 450 }}>
+        <Grid.Column style={{ maxWidth: 450}}>
           <Header as='h2' color='teal' textAlign='center'>
-            Create an account
+            Create a secure profile
           </Header>
 
           <Form size='large' onSubmit={handleSubmit}>
-            <Segment stacked>
+            <Segment>
               <Form.Input fluid icon='user' iconPosition='left'
                 placeholder='E-mail address'
                 name="email"
@@ -91,19 +91,12 @@ const SignupForm = ({ token }) => {
                 value={inputs.firstName}
                 onChange={handleChange}
               />
-              <Form.Input
-                fluid
-                icon='address card outline'
-                iconPosition='left'
-                placeholder='Last Name'
-                name='lastName'
-                value={inputs.lastName}
-                onChange={handleChange}
-              />
               <Button color='teal' fluid size='large' type="submit">
                 I'm ready to take the quiz!
               </Button>
             </Segment>
+            <Divider ></Divider>
+            <p>or <Link href='/login'><a>Login</a></Link></p>
           </Form>
         </Grid.Column>
       </Grid>

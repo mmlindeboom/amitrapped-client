@@ -15,9 +15,7 @@ const StepForm = ({ name, description, isVisible }) => {
         <Grid.Column>
           <Item.Group style={{minHeight: 250}}>
             <Item>
-              <Item.Image src={`/static/traps/${name.toLowerCase().split(' ').join('-')}.png`}
-                onError={(e) => e.target.src='/static/traps/placeholder.jpg'}
-              />
+              <Item.Image src={`/static/traps/${name.toLowerCase().split(' ').join('-')}.png`} />
               <Item.Content verticalAlign="middle">
                 <Item.Header>{name}</Item.Header>
                 <Item.Description>{description}</Item.Description>

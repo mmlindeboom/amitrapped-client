@@ -12,9 +12,20 @@ export default function({ children }) {
         <meta charSet="utf-8" />
         <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
       </Head>
-      <Card>
-        {children}
-      </Card>
+      <style jsx>{`
+        .logged-out {
+          background-image: url('/static/trapsBackground-72.png');
+          background-repeat: repeat;
+          background-color: #fff;
+          background-attachment: fixed;
+        }
+      `}</style>
+
+      <div className="logged-out">
+        <Card>
+          {children}
+        </Card>
+      </div>
     </Container>
   )
 }

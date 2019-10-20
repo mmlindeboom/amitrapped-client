@@ -209,14 +209,14 @@ const auth = ctx => {
 
   if (ctx.req && !token) {
     ctx.res.writeHead(302, {
-      Location: '/login'
+      Location: '/welcome'
     });
     ctx.res.end();
     return;
   }
 
   if (!token) {
-    next_router__WEBPACK_IMPORTED_MODULE_6___default.a.push('/login');
+    next_router__WEBPACK_IMPORTED_MODULE_6___default.a.push('/welcome');
   }
 
   return token;

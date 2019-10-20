@@ -9,30 +9,30 @@ import {
 } from 'semantic-ui-react'
 import AdminLayout from '../../components/layouts/AdminLayout'
 import { withAuthSync } from '../../lib/auth'
-import { USER_TRAPS } from '../../data/user'
+import { ADMIN_QUERY } from '../../data/admin'
 import EditTrapForm from '../../components/EditTrapForm'
 
 const EditQuiz = dynamic(() => import('../../components/admin/EditQuiz'), { ssr: false})
 
 const Dashboard = (client => {
-  const {data: {userTraps}, loading}= useQuery(USER_TRAPS)
-  const [active, setActive] = useState('traps')
+  const {data: { traps, quiz }, loading}= useQuery(ADMIN_QUERY)
+  const [active, setActive] = useState('quiz')
 
   return (
     <AdminLayout client={client}>
       {loading && <Dimmer><Loader></Loader></Dimmer>}
       <Menu tabular>
-        <Menu.Item ctive={active === 'quiz'} onClick={() => setActive('quiz')}>Quiz</Menu.Item>
+        <Menu.Item active={active === 'quiz'} onClick={() => setActive('quiz')}>Quiz Settings</Menu.Item>
         <Menu.Item active={active === 'traps'} onClick={() => setActive('traps')}>Traps</Menu.Item>
         <Menu.Item disabled>Questions</Menu.Item>
         <Menu.Item disabled>Pillars</Menu.Item>
       </Menu>
       {active === 'quiz' &&
-        <EditQuiz></EditQuiz>
+        <EditQuiz quiz={quiz}></EditQuiz>
       }
       {active === 'traps' &&
-        <Grid relaxed celled='internally' style={{maxWidth: '1024px', margin: '0 auto'}}>
-          { userTraps && userTraps.map(trap => (
+        <Grid relaxed celled='internally'>
+          { traps && traps.map(trap => (
             <Grid.Row>
               <Grid.Column>
                 <EditTrapForm trap={trap}></EditTrapForm>

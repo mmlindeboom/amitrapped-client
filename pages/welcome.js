@@ -14,15 +14,13 @@ export default ({client}) => {
     <Layout>
       <Grid verticalAlign="middle" style={{ height: '100vh' }}>
         <Grid.Column>
-          <Segment basic>
-            <Grid stackable>
-              <Grid.Column verticalAlign="middle">
-                <Segment stacked style={{maxWidth: 450, margin: '0 auto'}}>
-                  <Login></Login>
-                </Segment>
-              </Grid.Column>
-            </Grid>
-          </Segment>
+          <Grid>
+            <Grid.Column verticalAlign="middle">
+              <Segment stacked style={{maxWidth: 450, margin: '0 auto'}}>
+                <SignupForm></SignupForm>
+              </Segment>
+            </Grid.Column>
+          </Grid>
         </Grid.Column>
       </Grid>
     </Layout>

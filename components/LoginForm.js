@@ -1,7 +1,7 @@
 import React from 'react';
 import { useMutation } from '@apollo/react-hooks'
 import { useState } from 'react'
-import { Button, Dimmer, Loader, Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
+import { Button, Dimmer, Divider, Loader, Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
 import { Container } from 'next/app';
 import Link from 'next/link'
 import { loginReadyFor } from '../lib/auth'
@@ -50,7 +50,7 @@ const Login = ({ token }) => {
           </Header>
 
           <Form size='large' onSubmit={handleSubmit}>
-            <Segment basic>
+            <Segment>
               <Form.Input fluid icon='user' iconPosition='left'
                 placeholder='E-mail address'
                 name="email"
@@ -72,6 +72,8 @@ const Login = ({ token }) => {
                 Login
               </Button>
             </Segment>
+            <Divider ></Divider>
+            <p>or <Link href='/welcome'><a>Sign up</a></Link></p>
           </Form>
         </Grid.Column>
       </Grid>
