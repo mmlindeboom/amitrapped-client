@@ -42,7 +42,7 @@ const Home = (({client}) => {
 
   return (
     <AppLayout client={client}>
-      <Header size="huge">Let's start here, {userState.name}</Header>
+      <Header size="huge">Let's start here{ userState.name ? `, ${userState.name}`: ''}</Header>
 
       <Grid celled="internally" relaxed>
         {loading && <Dimmer active inverted><Loader></Loader></Dimmer>}
