@@ -55,7 +55,7 @@ export default function({ client, page, children }) {
       </Head>
       <Menu attached="top" color="teal" inverted>
         <Menu.Item onClick={() => Router.push('/')}>
-          <Header color="white" inverted>
+          <Header inverted>
             <Image src="/static/logo.png" size="mini" style={{margin: 0}} />
             <Header.Content>Identify Your Traps</Header.Content>
           </Header>
@@ -71,7 +71,7 @@ export default function({ client, page, children }) {
           </Dropdown>
         </Menu.Menu>
       </Menu>
-      <Image src="/static/airplane.png"></Image>
+      <Image size="medium" src="/static/journey.png"></Image>
       <Grid verticalAlign="middle" style={gridStyles}>
         <Grid.Column>
           {children}

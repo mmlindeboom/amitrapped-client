@@ -50,10 +50,6 @@ const SignupForm = ({ token }) => {
       }
       <Grid textAlign='center'>
         <Grid.Column style={{ maxWidth: 450}}>
-          <Header as='h2' color='teal' textAlign='center'>
-            Create a secure profile
-          </Header>
-
           <Form size='large' onSubmit={handleSubmit}>
             <Segment>
               <Form.Input fluid icon='user' iconPosition='left'
@@ -82,21 +78,12 @@ const SignupForm = ({ token }) => {
                 value={inputs.passwordConfirmation}
                 onChange={handleChange}
               />
-              <Form.Input
-                fluid
-                icon='address card outline'
-                iconPosition='left'
-                placeholder='First Name'
-                name='firstName'
-                value={inputs.firstName}
-                onChange={handleChange}
-              />
-              <Button color='teal' fluid size='large' type="submit">
+              <Button color="teal" fluid size='large' type="submit">
                 I'm ready to take the quiz!
               </Button>
             </Segment>
             <Divider ></Divider>
-            <p>or <Link href='/login'><a>Login</a></Link></p>
+            <p>or <Link href='/login'><a style={{textDecoration: 'underline'}}>Login</a></Link></p>
           </Form>
         </Grid.Column>
       </Grid>

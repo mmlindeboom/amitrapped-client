@@ -45,8 +45,9 @@ const q = (({client}) => {
 
   const [step, setStep] = useState(0)
   const [questions, updateAnswers] = useState([])
-  const [percentComplete, setPercent] = useState(0)
+  const [percentComplete, setPercent] = useState('')
   const [name, setName] = useState('Home')
+  //TODO: This shit is unsustainable
 
   const [introSeen, setIntroSeen] = useState(false)
 
@@ -77,7 +78,12 @@ const q = (({client}) => {
 
   }, [user, reply])
 
-
+  useEffect(() => {
+    if (answerReq.data) {
+      const { completed } = answerReq.data.updateAnswer.reply
+      setIntroSeen(completed > 0)
+    }
+  }, [answerReq])
 
   const done = (questions.length && step === questions.length)
 
@@ -86,6 +92,7 @@ const q = (({client}) => {
       <Grid style={{minHeight: '325px'}}>
         <Grid.Column verticalAlign="middle">
           { (loading || answerReq.loading) && <Dimmer active inverted><Loader></Loader></Dimmer> }
+
           { done && (
             <Segment placeholder>
               <Header color="olive" icon>
@@ -106,7 +113,7 @@ const q = (({client}) => {
                                           {...answer} />)}
         </Grid.Column>
       </Grid>
-      {introSeen && <Progress percent={percentComplete}
+      {introSeen && !loading && <Progress percent={percentComplete}
                            progress
                            size="small"
                            color="olive"></Progress> }

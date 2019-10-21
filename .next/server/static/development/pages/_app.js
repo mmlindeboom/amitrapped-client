@@ -136,7 +136,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement;
 const getToken = () => js_cookie__WEBPACK_IMPORTED_MODULE_7___default.a.get('token');
 async function loginReadyFor(token, options = {}) {
   let redirect = '/';
-  if (options['welcomePage']) redirect = '/landing';
+  if (options['welcomePage']) redirect = '/q';
   return new _babel_runtime_corejs2_core_js_promise__WEBPACK_IMPORTED_MODULE_4___default.a(res => {
     js_cookie__WEBPACK_IMPORTED_MODULE_7___default.a.set('token', token, {
       expires: 1
