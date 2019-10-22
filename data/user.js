@@ -22,6 +22,7 @@ export const USER_TRAPS = gql`
       id
       name
       description
+      score
       pillar {
         name
       }

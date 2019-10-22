@@ -3,25 +3,31 @@ import { useState } from 'react'
 import {
   Item,
   Grid,
-  Segment
+  Segment,
+  Rating,
+  Label,
+  Progress
 } from 'semantic-ui-react'
 import Visible from '../components/Visible'
 
-const StepForm = ({ name, description, isVisible }) => {
+const StepForm = ({ name, score, description, isVisible }) => {
 
   return (
     <Visible show={isVisible}>
-      <Grid verticalAlign="middle" style={{marginTop: 24, marginBottom: 32}}>
+      <Grid verticalAlign="middle" style={{maxWidth: 800}}>
         <Grid.Column>
-          <Item.Group style={{minHeight: 250}}>
-            <Item>
-              <Item.Image src={`/static/traps/${name.toLowerCase().split(' ').join('-')}.png`} />
-              <Item.Content verticalAlign="middle">
-                <Item.Header>{name}</Item.Header>
-                <Item.Description>{description}</Item.Description>
-              </Item.Content>
-            </Item>
-          </Item.Group>
+          <Segment>
+            <Item.Group>
+              <Item>
+                <Item.Image src={`/static/traps/${name.toLowerCase().split(' ').join('-')}.png`} />
+                <Item.Content verticalAlign="middle">
+                  <Item.Header>{name}</Item.Header>
+                  <Item.Description><p dangerouslySetInnerHTML={{ __html: description }}></p></Item.Description>
+                </Item.Content>
+              </Item>
+            </Item.Group>
+            <Label>Trap Score: {100*(score/5)}%</Label>
+          </Segment>
         </Grid.Column>
       </Grid>
     </Visible>

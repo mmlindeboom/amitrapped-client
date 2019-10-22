@@ -10,8 +10,8 @@ import {
 import AdminLayout from '../../components/layouts/AdminLayout'
 import { withAuthSync } from '../../lib/auth'
 import { ADMIN_QUERY } from '../../data/admin'
-import EditTrapForm from '../../components/EditTrapForm'
 
+const EditTrapForm = dynamic(() => import('../../components/EditTrapForm'), {ssr: false})
 const EditQuiz = dynamic(() => import('../../components/admin/EditQuiz'), { ssr: false})
 
 const Dashboard = (client => {

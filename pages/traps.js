@@ -58,11 +58,11 @@ const Traps = (({client}) => {
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
-          <Grid.Column verticalAlign="middle">
+          <Grid.Column>
             {userTraps && userTraps.length > 1 && (
                 <div>
                   {loading && <Dimmer><Loader></Loader></Dimmer>}
-                  {userTraps && userTraps.map((trap, idx) => <TrapCard name={trap.name} description={trap.description} isVisible={true} key={idx}></TrapCard>)}
+                  {userTraps && userTraps.map((trap, idx) => <TrapCard name={trap.name} score={trap.score} description={trap.description} isVisible={true} key={idx}></TrapCard>)}
                 </div>
               )}
           </Grid.Column>

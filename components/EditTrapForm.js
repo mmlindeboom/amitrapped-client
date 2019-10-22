@@ -8,6 +8,7 @@ import {
   Dimmer,
   Segment
 } from 'semantic-ui-react'
+import ReactQuill from 'react-quill'
 import { UPDATE_TRAP } from '../data/admin'
 
 const EditTrapForm = ({trap}) => {
@@ -34,17 +35,22 @@ const EditTrapForm = ({trap}) => {
         <Item>
           { loading && <Dimmer active inverted><Loader></Loader></Dimmer> }
           <Item.Image size="small" src={`/static/traps/${name.toLowerCase().split(' ').join('-')}.png`} />
-
             {editing &&
               <Item.Content verticalAlign="middle">
                 <Form onSubmit={handleSubmit}>
                   <Form.Input label="Name"
                     defaultValue={name}
                     onChange={(e) => setName(e.target.value)}></Form.Input>
-                  <Form.TextArea label="Description"
+
+                  <Form.Field as={ReactQuill}
+                    value={description}
+                    onChange={(val) => setDescription(val)}
+                    modules={{toolbar: [['bold', 'italic', 'underline']]}}
+                  />
+                  {/* <Form.TextArea label="Description"
                     defaultValue={description}
                     style={{ minHeight: 200 }}
-                    onChange={(e) => setDescription(e.target.value)}></Form.TextArea>
+                    onChange={(e) => setDescription(e.target.value)}></Form.TextArea> */}
                   <Form.Group>
                     <Button onClick={() => setEditing(false)}>Cancel</Button>
                     <Form.Field control={Button} primary>Save</Form.Field>
@@ -58,7 +64,7 @@ const EditTrapForm = ({trap}) => {
               <Item.Content verticalAlign="middle">
                 <Item.Header>{name}</Item.Header>
                 <Item.Meta>Pillar: {trap.pillar.name}</Item.Meta>
-                <Item.Description>{description}</Item.Description>
+                <Item.Description><p dangerouslySetInnerHTML={{ __html: description }}></p></Item.Description>
                 <Item.Extra>
                   <Button primary onClick={() => setEditing(true)}>Edit</Button>
                 </Item.Extra>

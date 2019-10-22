@@ -73,7 +73,7 @@ const Login = ({ token }) => {
               </Button>
             </Segment>
             <Divider ></Divider>
-            <p>or <Link href='/welcome'><a>Sign up</a></Link></p>
+            <p>or <Link href='/welcome'><a style={{textDecoration: 'underline'}}>Sign up</a></Link></p>
           </Form>
         </Grid.Column>
       </Grid>
