@@ -41,7 +41,7 @@ export default function({ client, page, children }) {
 
   const gridStyles = {
     maxWidth: '1024px',
-    margin: '0 auto'
+    margin: '140px auto 0 auto'
   }
 
   return (
@@ -71,7 +71,7 @@ export default function({ client, page, children }) {
           </Dropdown>
         </Menu.Menu>
       </Menu>
-      <Image size="medium" src="/static/journey.png"></Image>
+      <Image size="large" src="/static/journey.png" style={{position: 'absolute', left: 0, top: 60}}></Image>
       <Grid verticalAlign="middle" style={gridStyles}>
         <Grid.Column>
           {children}

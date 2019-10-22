@@ -26,7 +26,7 @@ const StepForm = ({ name, score, description, isVisible }) => {
                 </Item.Content>
               </Item>
             </Item.Group>
-            <Label>Trap Score: {100*(score/5)}%</Label>
+            <Label color="teal">Trap Score: {100*(score/5)}%</Label>
           </Segment>
         </Grid.Column>
       </Grid>

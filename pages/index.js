@@ -52,7 +52,7 @@ const Home = (({client}) => {
             <Steps percentComplete={userState.percentComplete}></Steps>
           </Grid.Column>
         </Grid.Row>
-        <Grid.Row columns={2}>
+        <Grid.Row>
           <Grid.Column>
             <Header>What you can do right now</Header>
             <Segment>
@@ -71,31 +71,6 @@ const Home = (({client}) => {
                         <Icon name='right chevron' />
                       </Button>
                     </Item.Extra>
-                  </Item.Content>
-                </Item>
-              </Item.Group>
-            </Segment>
-          </Grid.Column>
-          <Grid.Column>
-            <Header>What are the digital traps?</Header>
-            <Segment>
-                <Item.Group divided>
-                  <Item>
-                    <Item.Image size='mini' src='/static/forest.jpg' />
-                    <Item.Content>
-                      <Item.Header>Header</Item.Header>
-                      <Item.Description>
-                        Description
-                      </Item.Description>
-                    </Item.Content>
-                  </Item>
-                  <Item>
-                    <Item.Image size='mini' src='/static/forest.jpg' />
-                    <Item.Content>
-                      <Item.Header>Header</Item.Header>
-                      <Item.Description>
-                        Description
-                    </Item.Description>
                   </Item.Content>
                 </Item>
               </Item.Group>
