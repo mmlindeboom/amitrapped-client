@@ -23,9 +23,7 @@ export const USER_TRAPS = gql`
       name
       description
       score
-      image {
-        url
-      }
+      imageUrl
       pillar {
         name
       }
