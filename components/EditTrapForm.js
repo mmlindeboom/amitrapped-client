@@ -101,7 +101,7 @@ const EditTrapForm = ({trap}) => {
 
             {!editing &&
               <Item>
-              <Item.Image size="small" src={`/static/traps/${name.toLowerCase().split(' ').join('-')}.png`} />
+              <Item.Image size="small" src={imagePath} />
               <Item.Content verticalAlign="middle">
                 <Item.Header>{name}</Item.Header>
                 <Item.Meta>Pillar: {trap.pillar.name}</Item.Meta>

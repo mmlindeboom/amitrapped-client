@@ -10,7 +10,7 @@ import {
 } from 'semantic-ui-react'
 import Visible from '../components/Visible'
 
-const StepForm = ({ name, score, description, isVisible }) => {
+const StepForm = ({ name, score, description, imageUrl, isVisible }) => {
 
   return (
     <Visible show={isVisible}>
@@ -19,7 +19,7 @@ const StepForm = ({ name, score, description, isVisible }) => {
           <Segment>
             <Item.Group>
               <Item>
-                <Item.Image src={`/static/traps/${name.toLowerCase().split(' ').join('-')}.png`} />
+                <Item.Image src={imageUrl} />
                 <Item.Content verticalAlign="middle">
                   <Item.Header>{name}</Item.Header>
                   <Item.Description><p dangerouslySetInnerHTML={{ __html: description }}></p></Item.Description>

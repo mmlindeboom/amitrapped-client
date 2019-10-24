@@ -62,7 +62,7 @@ const Traps = (({client}) => {
             {userTraps && userTraps.length > 1 && (
                 <div>
                   {loading && <Dimmer><Loader></Loader></Dimmer>}
-                  {userTraps && userTraps.map((trap, idx) => <TrapCard name={trap.name} score={trap.score} description={trap.description} isVisible={true} key={idx}></TrapCard>)}
+                  {userTraps && userTraps.map((trap, idx) => <TrapCard isVisible={true} key={idx} {...trap}></TrapCard>)}
                 </div>
               )}
           </Grid.Column>
