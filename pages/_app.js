@@ -1,6 +1,9 @@
 import App, { Container } from 'next/app';
 import { ApolloProvider } from '@apollo/react-hooks';
 import withApollo from '../lib/withApollo';
+import * as Sentry from '@sentry/browser'
+
+Sentry.init({dsn: "https://6d1c9e30c87a49c49440c9d2919ab738@sentry.io/1795555"});
 
 class MyApp extends App {
   render() {
