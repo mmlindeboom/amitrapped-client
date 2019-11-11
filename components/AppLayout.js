@@ -1,25 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head'
 import { Container } from 'next/app'
 import Router from 'next/router'
 import {
-  Card,
-  Button,
-  Divider,
   Dropdown,
   Grid,
   Header,
   Icon,
   Image,
-  List,
   Menu,
-  Responsive,
-  Segment,
-  Rail,
-  Sidebar,
-  Visibility,
+  Responsive
 } from 'semantic-ui-react'
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation} from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
 import { logout } from '../lib/auth'
 
@@ -32,7 +24,7 @@ const LOGOUT_USER = gql`
 
 export default function({ client, page, children }) {
   const [logOutUser] = useMutation(LOGOUT_USER)
-
+  const [windowWidth, setWindowWidth] = useState(0)
 
   const handleLogout = () => {
     logOutUser()
@@ -41,7 +33,7 @@ export default function({ client, page, children }) {
 
   const gridStyles = {
     maxWidth: '1024px',
-    margin: '140px auto 0 auto'
+    margin: Responsive.onlyTablet.minWidth <= windowWidth ? '140px auto 0 auto' : '24px auto 0 auto'
   }
 
   return (
@@ -50,28 +42,33 @@ export default function({ client, page, children }) {
         <title>Am I Trapped?</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta charSet="utf-8" />
-        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
         <link rel="icon" type="image/x-icon" href="../static/favicon.ico" />
+        <link href="https://fonts.googleapis.com/css?family=Nunito:400,600&display=swap" rel="stylesheet"></link>
+
       </Head>
-      <Menu attached="top" color="teal" inverted>
+      <Menu attached="top" color="darkGrey">
         <Menu.Item onClick={() => Router.push('/')}>
-          <Header inverted>
-            <Image src="/static/logo.png" size="mini" style={{margin: 0}} />
-            <Header.Content>Identify Your Traps</Header.Content>
+          <Header>
+            <Header.Content>Your Digital Health</Header.Content>
           </Header>
         </Menu.Item>
-        {page && <Menu.Item active><Icon name="angle right" style={{position: 'absolute', left: -8}}></Icon>{page}</Menu.Item>}
-        <Menu.Menu position="right">
-          <Dropdown item simple icon="setting">
-            <Dropdown.Menu>
-              <Dropdown.Item onClick={() => Router.push('/admin')}><Icon name="lock"></Icon>Admin</Dropdown.Item>
-              <Dropdown.Item onClick={handleLogout}><Icon name="hand victory"></Icon>Logout</Dropdown.Item>
+        {page && <Menu.Item active><Icon name="angle right" color='orange' style={{position: 'absolute', left: -8}}></Icon>{page}</Menu.Item>}
+        <Menu.Menu position="right" color="orange">
+          <Dropdown item simple icon="setting" color='orange'>
+            <Dropdown.Menu color='darkGrey'>
+              <Dropdown.Item onClick={() => Router.push('/admin')}><Icon name="lock" color="orange"></Icon>Admin</Dropdown.Item>
+              <Dropdown.Item onClick={handleLogout}><Icon name="hand victory" color="orange"></Icon>Logout</Dropdown.Item>
 
             </Dropdown.Menu>
           </Dropdown>
         </Menu.Menu>
       </Menu>
-      <Image size="large" src="/static/journey.png" style={{position: 'absolute', left: 0, top: 60}}></Image>
+      <Responsive
+        fireOnMount
+        onUpdate={(e, {width}) => setWindowWidth(width)}
+        minWidth={Responsive.onlyTablet.minWidth}>
+        <Image size="large" src="/static/journey.png" style={{position: 'absolute', left: 0, top: 60}}></Image>
+      </Responsive>
       <Grid verticalAlign="middle" style={gridStyles}>
         <Grid.Column>
           {children}

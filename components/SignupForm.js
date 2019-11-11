@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState} from 'react';
 import { useMutation } from '@apollo/react-hooks'
-import { useState } from 'react'
 import { Button, Dimmer, Divider, Loader, Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
 import { Container } from 'next/app';
 import Link from 'next/link'
@@ -35,10 +34,25 @@ const useLoginForm = (callback) => {
 const SignupForm = ({ token }) => {
   const [signup, {loading, data, error}] = useMutation(SIGNUP_USER)
   const {inputs, handleChange, handleSubmit} = useLoginForm(() => signup({variables: inputs}))
+  const [inputErrors, setInputErrors] = useState({})
+  const [formIsInvalid, setFormIsInValid] = useState(false)
 
-  if (data && data.signUp.token) {
-    loginReadyFor(data.signUp.token, {welcomePage: true})
-  }
+  useEffect(() => {
+    setFormIsInValid(false)
+    if (data && data.signUp.token) {
+      loginReadyFor(data.signUp.token, {welcomePage: true})
+    }
+
+    if (data && data.signUp['errors'] && data.signUp.errors.length) {
+      setInputErrors(data.signUp.errors.reduce((errors, {path, message}) => {
+        errors[path] = message;
+        return errors;
+      }, {}))
+
+      setFormIsInValid(true)
+    }
+  }, [data])
+
 
   return (
     <Container>
@@ -50,10 +64,11 @@ const SignupForm = ({ token }) => {
       }
       <Grid textAlign='center'>
         <Grid.Column style={{ maxWidth: 450}}>
-          <Form size='large' onSubmit={handleSubmit}>
+          <Form size='large' onSubmit={handleSubmit} error={formIsInvalid}>
             <Segment>
               <Form.Input fluid icon='user' iconPosition='left'
                 placeholder='E-mail address'
+                error={'email' in inputErrors}
                 name="email"
                 value={inputs.email}
                 onChange={handleChange}
@@ -64,6 +79,7 @@ const SignupForm = ({ token }) => {
                 iconPosition='left'
                 placeholder='Password'
                 type='password'
+                error={'password' in inputErrors}
                 name='password'
                 value={inputs.password}
                 onChange={handleChange}
@@ -75,10 +91,14 @@ const SignupForm = ({ token }) => {
                 placeholder='Confirm Password'
                 type='password'
                 name='passwordConfirmation'
+                error={'passwordConfirmation' in inputErrors}
                 value={inputs.passwordConfirmation}
                 onChange={handleChange}
               />
-              <Button color="teal" fluid size='large' type="submit">
+              {formIsInvalid && (<Message error style={{textAlign: 'left'}}>
+                <ul>{Object.values(inputErrors).map(err => <li>{err}</li>)}</ul>
+              </Message>)}
+              <Button primary fluid size='large' type="submit">
                 I'm ready to take the quiz!
               </Button>
             </Segment>

@@ -72,7 +72,7 @@ const StepForm = ({ id, value, prompt, index, show, step, handleChange}) => {
       </Visible>
       <div style={{marginTop: 18}}>
         {index > 0 && <Button onClick={() => step((index - 1) || 0)}>Prev</Button>}
-        {value && <Button onClick={() => step(index + 1)} primary>Next</Button>}
+        {value && <Button onClick={() => step(index + 1)} color="teal">Next</Button>}
       </div>
     </div>
   )

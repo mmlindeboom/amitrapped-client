@@ -93,6 +93,17 @@ module.exports =
 /************************************************************************/
 /******/ ({
 
+/***/ "./.semantic/dist/semantic.min.css":
+/*!*****************************************!*\
+  !*** ./.semantic/dist/semantic.min.css ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+
 /***/ "./lib/auth.js":
 /*!*********************!*\
   !*** ./lib/auth.js ***!
@@ -1007,6 +1018,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _apollo_react_hooks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @apollo/react-hooks */ "@apollo/react-hooks");
 /* harmony import */ var _apollo_react_hooks__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_apollo_react_hooks__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _lib_withApollo__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../lib/withApollo */ "./lib/withApollo.js");
+/* harmony import */ var _sentry_browser__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @sentry/browser */ "@sentry/browser");
+/* harmony import */ var _sentry_browser__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_sentry_browser__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _semantic_dist_semantic_min_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../.semantic/dist/semantic.min.css */ "./.semantic/dist/semantic.min.css");
+/* harmony import */ var _semantic_dist_semantic_min_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_semantic_dist_semantic_min_css__WEBPACK_IMPORTED_MODULE_6__);
 
 var _jsxFileName = "/Users/mattl/Dev/personal/amitrapped-client/pages/_app.js";
 
@@ -1014,6 +1029,11 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement;
 
 
 
+
+
+_sentry_browser__WEBPACK_IMPORTED_MODULE_5__["init"]({
+  dsn: "https://6d1c9e30c87a49c49440c9d2919ab738@sentry.io/1795555"
+});
 
 class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_2___default.a {
   render() {
@@ -1025,20 +1045,20 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_2___default.a {
     return __jsx(next_app__WEBPACK_IMPORTED_MODULE_2__["Container"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 9
+        lineNumber: 12
       },
       __self: this
     }, __jsx(_apollo_react_hooks__WEBPACK_IMPORTED_MODULE_3__["ApolloProvider"], {
       client: apollo,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 10
+        lineNumber: 13
       },
       __self: this
     }, __jsx(Component, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, pageProps, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 11
+        lineNumber: 14
       },
       __self: this
     }))));
@@ -1070,6 +1090,17 @@ module.exports = __webpack_require__(/*! private-next-pages/_app.js */"./pages/_
 /***/ (function(module, exports) {
 
 module.exports = require("@apollo/react-hooks");
+
+/***/ }),
+
+/***/ "@sentry/browser":
+/*!**********************************!*\
+  !*** external "@sentry/browser" ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("@sentry/browser");
 
 /***/ }),
 

@@ -1,11 +1,17 @@
 import { gql } from 'apollo-boost'
 
-export const GET_PLACEMENTS = gql`
+export const GET_QUIZ = gql`
   query {
+    user {
+      firstName
+    }
     reply {
       token,
       complete,
       completed,
+      quiz {
+        intro
+      }
       answers {
         value
         id

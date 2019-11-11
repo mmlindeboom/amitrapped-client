@@ -45,9 +45,6 @@ const Login = ({ token }) => {
       }
       <Grid textAlign='center'>
         <Grid.Column style={{ maxWidth: 450 }}>
-          <Header as='h2' color='teal' textAlign='center'>
-            Log-in
-          </Header>
 
           <Form size='large' onSubmit={handleSubmit}>
             <Segment>
@@ -68,7 +65,7 @@ const Login = ({ token }) => {
                 onChange={handleChange}
               />
 
-              <Button color='teal' fluid size='large' type="submit">
+              <Button primary fluid size='large' type="submit">
                 Login
               </Button>
             </Segment>

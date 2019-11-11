@@ -8,8 +8,10 @@ import {
   Header,
   Icon,
   Item,
+  Image,
   Loader,
-  Segment
+  Segment,
+  Responsive
 } from 'semantic-ui-react'
 import { withAuthSync } from '../lib/auth'
 import { GET_USER } from '../data/user'
@@ -42,14 +44,12 @@ const Home = (({client}) => {
 
   return (
     <AppLayout client={client}>
-      <Header size="huge">Let's start here{ userState.name ? `, ${userState.name}`: ''}</Header>
-
       <Grid celled="internally" relaxed>
         {loading && <Dimmer active inverted><Loader></Loader></Dimmer>}
         <Grid.Row stretched>
           <Grid.Column>
             <Header>The Plan</Header>
-            <Steps percentComplete={userState.percentComplete}></Steps>
+            <Steps percentComplete={userState.percentComplete} inverted></Steps>
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
@@ -58,18 +58,35 @@ const Home = (({client}) => {
             <Segment>
               <Item.Group>
                 <Item>
-                  <Item.Image size='tiny' src='/static/forest.jpg' />
-                  <Item.Content>
+                  <Image size="small" circular bordered src='/static/ReviewTraps.png' />
+                  <Item.Content verticalAlign="middle">
                     <Item.Header as='a'>{todo.header}</Item.Header>
                     <Item.Meta>{todo.meta}</Item.Meta>
                     <Item.Description>
                       {todo.description}
                     </Item.Description>
                     <Item.Extra>
+
+
+                    <Responsive {...Responsive.onlyTablet}>
+                      <Button primary fluid onClick={() => Router.push(todo.url)}>
+                          {todo.cta}
+                          <Icon name='right chevron' />
+                        </Button>
+                    </Responsive>
+
+                    <Responsive {...Responsive.onlyComputer}>
                       <Button primary floated='right' onClick={() => Router.push(todo.url)}>
-                        {todo.cta}
-                        <Icon name='right chevron' />
-                      </Button>
+                          {todo.cta}
+                          <Icon name='right chevron' />
+                        </Button>
+                    </Responsive>
+                    <Responsive {...Responsive.onlyMobile}>
+                      <Button primary fluid onClick={() => Router.push(todo.url)}>
+                          {todo.cta}
+                          <Icon name='right chevron' />
+                        </Button>
+                    </Responsive>
                     </Item.Extra>
                   </Item.Content>
                 </Item>

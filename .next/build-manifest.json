@@ -10,6 +10,8 @@
     ],
     "/_app": [
       "static/runtime/webpack.js",
+      "static/css/styles.chunk.css",
+      "static/chunks/styles.js",
       "static/runtime/main.js"
     ],
     "/_error": [
@@ -20,7 +22,7 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/traps": [
+    "/q": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]

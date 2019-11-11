@@ -9,8 +9,11 @@ export default {
   complete: {
     header: "Review your traps",
     meta: "It's the next step",
-    description: "Lorem Ipsum",
+    description: "Here's a test",
     cta: 'Review',
     url: "/traps"
+  },
+  takeAction: {
+
   }
 }
