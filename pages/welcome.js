@@ -29,7 +29,7 @@ export default ({client}) => {
                   <Grid.Column verticalAlign="middle">
                     <Segment basic>
                       <Header as="h1" color="teal">Your digital health is important.</Header>
-                      <Header as="h4" color="grey">
+                      <Header as="h4" color="darkgrey">
                         Which is why the results of your digital wellness test are yours. We'll only ever ask you for an email to send you results, and a
                         password to secure them in case you want to come back.
                       </Header>

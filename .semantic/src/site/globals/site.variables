@@ -1,0 +1,30 @@
+/*******************************
+     User Global Variables
+*******************************/
+@primaryColor   : @orange;
+@secondaryColor : @grey;
+@linkColor      : @teal;
+@pageFont: 'Nunito', sans-serif;
+@pageBackground: lighten(@darkGrey, 75%);
+@headerFont: 'Nunito', sans-serif;
+@headerFontWeight: 600;
+@headerColor: @darkGrey;
+
+@celledBorderColor: @orange;
+
+@red            : #B03060;
+@orange         : #CF632E;
+@yellow         : #DDA62A;
+@olive          : #b5cc18;
+@green          : #016936;
+@teal           : #04839C;
+@cyan           : #04839C;
+@blue           : #005595;
+@violet         : #EE82EE;
+@purple         : #B413EC;
+@pink           : #FF1493;
+@brown          : #A52A2A;
+@grey           : lighten(@darkGrey, 50%);
+@darkGrey       : #333e48;
+@black          : #000000;
+

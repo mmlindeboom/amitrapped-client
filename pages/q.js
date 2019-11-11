@@ -1,7 +1,7 @@
 import { useQuery, useLazyQuery, useMutation } from '@apollo/react-hooks'
 import { useState, useEffect } from 'react'
 import { withAuthSync } from '../lib/auth'
-import { GET_PLACEMENTS, UPDATE_ANSWER } from '../data/quiz'
+import { GET_QUIZ, UPDATE_ANSWER } from '../data/quiz'
 import { GET_USER } from '../data/user'
 import {
   Button,
@@ -40,7 +40,7 @@ return (
 
 const q = (({client}) => {
   const {data: {user}} = useQuery(GET_USER)
-  const {loading, error, data: {reply}}= useQuery(GET_PLACEMENTS)
+  const {loading, error, data: {reply}}= useQuery(GET_QUIZ)
   const [updateAnswer, {...answerReq}] = useMutation(UPDATE_ANSWER)
 
   const [step, setStep] = useState(0)
