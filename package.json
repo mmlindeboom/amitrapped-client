@@ -10,6 +10,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start -p $PORT",
+    "export": "next build && next export",
     "semantic:build": "cd .semantic && gulp build-css build-assets",
     "semantic:watch": "cd .semantic && yarn run semantic:build && gulp watch"
   },
