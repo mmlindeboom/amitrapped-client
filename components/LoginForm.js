@@ -1,7 +1,16 @@
 import React from 'react';
 import { useMutation } from '@apollo/react-hooks'
 import { useState } from 'react'
-import { Button, Dimmer, Divider, Loader, Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
+import {
+  Button,
+  Dimmer,
+  Divider,
+  Loader,
+  Form,
+  Grid,
+  Message,
+  Segment,
+  Responsive } from 'semantic-ui-react'
 import { Container } from 'next/app';
 import Link from 'next/link'
 import { loginReadyFor } from '../lib/auth'
