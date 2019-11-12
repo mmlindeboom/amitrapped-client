@@ -13,6 +13,9 @@
     "semantic:build": "cd .semantic && gulp build-css build-assets",
     "semantic:watch": "cd .semantic && yarn run semantic:build && gulp watch"
   },
+  "engines": {
+    "node": ">=10.15.3"
+  },
   "dependencies": {
     "@apollo/react-hooks": "^0.1.0-beta.10",
     "@rails/activestorage": "^6.0.0",

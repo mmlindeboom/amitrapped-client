@@ -64,7 +64,7 @@ const SignupForm = ({ token }) => {
       }
       <Grid textAlign='center'>
         <Grid.Column style={{ maxWidth: 450}}>
-          <Form size='large' onSubmit={handleSubmit} error={formIsInvalid}>
+          <Form size='large' onSubmit={handleSubmit}>
             <Segment>
               <Form.Input fluid icon='user' iconPosition='left'
                 placeholder='E-mail address'
@@ -95,7 +95,7 @@ const SignupForm = ({ token }) => {
                 value={inputs.passwordConfirmation}
                 onChange={handleChange}
               />
-              {formIsInvalid && (<Message error style={{textAlign: 'left'}}>
+              {formIsInvalid && (<Message color="yellow" style={{textAlign: 'left'}}>
                 <ul>{Object.values(inputErrors).map(err => <li>{err}</li>)}</ul>
               </Message>)}
               <Button primary fluid size='large' type="submit">
