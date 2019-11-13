@@ -1,6 +1,6 @@
 import React from 'react';
 import { useMutation } from '@apollo/react-hooks'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   Button,
   Dimmer,
@@ -9,8 +9,7 @@ import {
   Form,
   Grid,
   Message,
-  Segment,
-  Responsive } from 'semantic-ui-react'
+  Segment} from 'semantic-ui-react'
 import { Container } from 'next/app';
 import Link from 'next/link'
 import { loginReadyFor } from '../lib/auth'
@@ -39,10 +38,28 @@ const useLoginForm = (callback) => {
 const Login = ({ token }) => {
   const [login, {loading, data, error}] = useMutation(AUTHENTICATE_USER)
   const {inputs, handleChange, handleSubmit} = useLoginForm(() => login({variables: inputs}))
+  const [inputErrors, setInputErrors] = useState({});
+  const [formIsInvalid, setFormIsInValid] = useState(false);
 
-  if (data && data.login) {
-    loginReadyFor(data.login.token)
-  }
+
+  useEffect(() => {
+
+    setFormIsInValid(false);
+    if (data && data.login.token) {
+      loginReadyFor(data.login.token)
+    }
+
+    if (data && data.login["errors"] && data.login.errors.length) {
+      setInputErrors(
+        data.login.errors.reduce((errors, { path, message }) => {
+          errors[path] = message;
+          return errors;
+        }, {})
+      );
+
+      setFormIsInValid(true);
+    }
+  }, [data]);
 
   return (
     <Container>
@@ -55,7 +72,7 @@ const Login = ({ token }) => {
       <Grid textAlign='center'>
         <Grid.Column style={{ maxWidth: 450 }}>
 
-          <Form size='large' onSubmit={handleSubmit}>
+          <Form size='large' onSubmit={handleSubmit} error={formIsInvalid}>
             <Segment>
               <Form.Input fluid icon='user' iconPosition='left'
                 placeholder='E-mail address'
@@ -73,7 +90,15 @@ const Login = ({ token }) => {
                 value={inputs.password}
                 onChange={handleChange}
               />
-
+              {formIsInvalid && (
+                <Message error style={{ textAlign: "left" }}>
+                  <ul>
+                    {Object.values(inputErrors).map(err => (
+                      <li>{err}</li>
+                    ))}
+                  </ul>
+                </Message>
+              )}
               <Button primary fluid size='large' type="submit">
                 Login
               </Button>

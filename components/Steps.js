@@ -10,8 +10,8 @@ const Steps = ({percentComplete}) => {
   return (
     <Step.Group size="small">
       <Step active={quizIncomplete} color="teal" disabled={!quizIncomplete} onClick={() => Router.push('/q')}>
-        {quizIncomplete && <Icon name='check circle outline' color="grey" size="mini" />}
-        {!quizIncomplete && <Icon name='check' color="green" size="mini" />}
+        {quizIncomplete && <Icon name='check circle outline' color="grey" size="large"/>}
+        {!quizIncomplete && <Icon name='check' color="green" size="large" />}
         <Step.Content>
           <Step.Title color="teal">{percentComplete > 0 ? 'Complete' : 'Take'} the quiz</Step.Title>
           {quizIncomplete && <Label color="teal" floating>{percentComplete}%</Label>}
