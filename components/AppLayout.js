@@ -56,9 +56,7 @@ export default function({ client, page, children }) {
         <Menu.Menu position="right" color="orange">
           <Dropdown item simple icon="setting" color='orange'>
             <Dropdown.Menu color='darkGrey'>
-              <Dropdown.Item onClick={() => Router.push('/admin')}><Icon name="lock" color="orange"></Icon>Admin</Dropdown.Item>
               <Dropdown.Item onClick={handleLogout}><Icon name="hand victory" color="orange"></Icon>Logout</Dropdown.Item>
-
             </Dropdown.Menu>
           </Dropdown>
         </Menu.Menu>
