@@ -37,4 +37,4 @@ const Dashboard = (client => {
   )
 })
 
-export default withAdminAuthSync(Dashboard)
+export default Dashboard
