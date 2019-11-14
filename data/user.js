@@ -45,7 +45,6 @@ export const AUTHENTICATE_USER = gql`
     }
   }
 `
-
 export const SIGNUP_USER = gql`
   mutation signUp($email: String!, $password: String!, $passwordConfirmation: String!) {
     signUp(email: $email, password: $password, passwordConfirmation: $passwordConfirmation) {

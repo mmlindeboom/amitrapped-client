@@ -1,14 +1,28 @@
 
 
 import React, { useState } from 'react';
+import { useMutation} from '@apollo/react-hooks'
 import Head from 'next/head'
+import { gql } from 'apollo-boost'
 import { Container } from 'next/app'
-import { Container as Card, Grid, Menu } from 'semantic-ui-react'
+import { Container as Card, Dropdown, Icon, Grid, Menu } from 'semantic-ui-react'
 import Router from 'next/router'
+import { logout } from '../../lib/auth'
 
+const LOGOUT_USER = gql`
+  mutation logout {
+    logout
+  }
+`
 
 export default function({ client, children }) {
   const [active, setActive] = useState('edit')
+  const [logOutUser] = useMutation(LOGOUT_USER)
+
+  const handleLogout = () => {
+    logOutUser()
+    logout(client)
+  }
 
   const handleClick = (name) => {
     setActive(name)
@@ -26,6 +40,13 @@ export default function({ client, children }) {
       <Menu fixed='top' pointing fluid>
         <Menu.Item name='Admin' active={active === 'edit'} onClick={() => handleClick('edit')}></Menu.Item>
         <Menu.Item name='Dashboard' disabled></Menu.Item>
+        <Menu.Menu position="right" color="orange">
+          <Dropdown item simple icon="setting" color='orange'>
+            <Dropdown.Menu color='darkGrey'>
+              <Dropdown.Item onClick={handleLogout}><Icon name="hand victory" color="orange"></Icon>Logout</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </Menu.Menu>
       </Menu>
       <Grid style={{ width: '1200px' }} padded verticalAlign='middle'>
         <Grid.Column>

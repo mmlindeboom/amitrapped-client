@@ -11,9 +11,9 @@ import {
 } from 'semantic-ui-react'
 import ReactQuill from 'react-quill'
 import { useDropzone } from 'react-dropzone'
-import { Dropper } from './Dropper'
-import { UPDATE_TRAP, CREATE_DIRECT_UPLOAD_MUTATION, ATTACH_TRAP_IMAGE_MUTATION } from '../data/admin'
-import { getFileMetadata, directUpload } from '../lib/upload'
+import { Dropper } from '../Dropper'
+import { UPDATE_TRAP, CREATE_DIRECT_UPLOAD_MUTATION, ATTACH_TRAP_IMAGE_MUTATION } from '../../data/admin'
+import { getFileMetadata, directUpload } from '../../lib/upload'
 
 const localImage = (name) => `/static/traps/${name.toLowerCase().split(' ').join('-')}.png`
 const EditTrapForm = ({trap}) => {

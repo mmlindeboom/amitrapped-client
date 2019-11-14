@@ -12,8 +12,8 @@ import {
   Segment} from 'semantic-ui-react'
 import { Container } from 'next/app';
 import Link from 'next/link'
-import { loginReadyFor } from '../lib/auth'
-import { AUTHENTICATE_USER } from '../data/user'
+import { loginReadyFor } from '../../lib/auth'
+import { AUTHENTICATE_ADMIN } from '../../data/admin'
 
 const useLoginForm = (callback) => {
   const [inputs, setInputs] = useState({email: '', password: ''})
@@ -34,8 +34,8 @@ const useLoginForm = (callback) => {
 }
 
 
-const Login = ({ token, query = AUTHENTICATE_USER }) => {
-  const [login, {loading, data, error}] = useMutation(query)
+const Login = ({ token }) => {
+  const [login, {loading, data, error}] = useMutation(AUTHENTICATE_ADMIN)
   const {inputs, handleChange, handleSubmit} = useLoginForm(() => login({variables: inputs}))
   const [inputErrors, setInputErrors] = useState({});
   const [formIsInvalid, setFormIsInValid] = useState(false);
@@ -45,7 +45,7 @@ const Login = ({ token, query = AUTHENTICATE_USER }) => {
 
     setFormIsInValid(false);
     if (data && data.login.token) {
-      loginReadyFor(data.login.token)
+      loginReadyFor(data.login.token, {admin: true})
     }
 
     if (data && data.login["errors"] && data.login.errors.length) {
@@ -102,8 +102,6 @@ const Login = ({ token, query = AUTHENTICATE_USER }) => {
                 Login
               </Button>
             </Segment>
-            <Divider ></Divider>
-            <p>or <Link href='/welcome'><a style={{textDecoration: 'underline'}}>Sign up</a></Link></p>
           </Form>
         </Grid.Column>
       </Grid>

@@ -8,11 +8,13 @@ import {
   Loader,
 } from 'semantic-ui-react'
 import AdminLayout from '../../components/layouts/AdminLayout'
-import { withAuthSync } from '../../lib/auth'
+import { withAdminAuthSync } from '../../lib/auth'
 import { ADMIN_QUERY } from '../../data/admin'
 
-const EditTrapForm = dynamic(() => import('../../components/EditTrapForm'), {ssr: false})
 const EditQuiz = dynamic(() => import('../../components/admin/EditQuiz'), { ssr: false})
+const EditTrapForm = dynamic(() => import('../../components/admin/EditTrapForm'), {ssr: false})
+const EditQuestions = dynamic(() => import('../../components/admin/EditQuestions'), {ssr: false})
+
 
 const Dashboard = (client => {
   const {data: { traps, quiz }, loading}= useQuery(ADMIN_QUERY)
@@ -24,14 +26,14 @@ const Dashboard = (client => {
       <Menu tabular>
         <Menu.Item active={active === 'quiz'} onClick={() => setActive('quiz')}>Quiz Settings</Menu.Item>
         <Menu.Item active={active === 'traps'} onClick={() => setActive('traps')}>Traps</Menu.Item>
-        <Menu.Item disabled>Questions</Menu.Item>
+        <Menu.Item active={active === 'questions'} onClick={() => setActive('questions')}>Questions</Menu.Item>
         <Menu.Item disabled>Pillars</Menu.Item>
       </Menu>
       {active === 'quiz' &&
         <EditQuiz quiz={quiz}></EditQuiz>
       }
       {active === 'traps' &&
-        <Grid relaxed celled='internally'>
+        <Grid relaxed celled='internally' style={{width: 800, margin: '0 auto'}}>
           { traps && traps.map(trap => (
             <Grid.Row>
               <Grid.Column>
@@ -41,9 +43,10 @@ const Dashboard = (client => {
           ))}
         </Grid>
       }
+      {active === 'questions' && <EditQuestions traps={traps}/>}
 
     </AdminLayout>
   )
 })
 
-export default withAuthSync(Dashboard)
+export default withAdminAuthSync(Dashboard)

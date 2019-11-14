@@ -31,7 +31,7 @@ const EditQuiz = ({ quiz }) => {
   }), [data, quiz])
 
   return (
-      <Card.Group>
+      <Card.Group style={{width: 800, margin: '0 auto'}}>
         <Card fluid>
           {loading && <Dimmer inverted><Loader></Loader></Dimmer>}
           <Card.Content header="Intro"></Card.Content>

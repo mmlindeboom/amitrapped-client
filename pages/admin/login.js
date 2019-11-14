@@ -1,13 +1,12 @@
 import React from 'react';
-import Layout from '../components/Layout'
-import Login from '../components/LoginForm'
-
+import Layout from '../../components/Layout'
+import Login from '../../components/admin/LoginForm'
 import {
   Segment,
   Grid,
   Divider,
-  Responsive
 } from 'semantic-ui-react'
+import { AUTHENTICATE_ADMIN } from '../../data/admin';
 
 export default ({client}) => {
   return (
@@ -18,7 +17,7 @@ export default ({client}) => {
             <Grid stackable>
               <Grid.Column verticalAlign="middle">
                 <Segment stacked style={{maxWidth: 450, margin: '0 auto'}}>
-                  <Login></Login>
+                  <Login query={AUTHENTICATE_ADMIN}></Login>
                 </Segment>
               </Grid.Column>
             </Grid>

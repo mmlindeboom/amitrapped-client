@@ -1,5 +1,17 @@
 import { gql } from 'apollo-boost'
 
+export const AUTHENTICATE_ADMIN = gql`
+  mutation loginAdmin($email: String!, $password: String!) {
+   login(email: $email, password: $password) {
+      token
+      errors {
+        path
+        message
+      }
+    }
+  }
+`
+
 export const ADMIN_QUERY = gql`
   query {
     traps {
@@ -10,10 +22,33 @@ export const ADMIN_QUERY = gql`
       pillar {
         name
       }
+      questions {
+        id
+        prompt
+      }
     }
     quiz {
       id
       intro
+    }
+  }
+`
+export const GET_QUESTIONS = gql`
+  query {
+    questions {
+      id
+      prompt
+      trap {
+        name
+      }
+    }
+  }
+`
+
+export const UPDATE_QUESTION = gql`
+  mutation updateQuestion($id: ID!, $prompt: String!) {
+    updateQuestion(id: $id, prompt: $prompt) {
+      prompt
     }
   }
 `

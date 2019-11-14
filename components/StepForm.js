@@ -21,7 +21,7 @@ const StepForm = ({ id, value, prompt, index, show, step, handleChange}) => {
             <Grid style={{textAlign: 'left'}}>
               <Grid.Column width={1}><Label attached="top left">{index+1}.</Label></Grid.Column>
               <Grid.Column width={15}>
-                <Header as="h3">{prompt}</Header>
+                <Header><h3 dangerouslySetInnerHTML={{ __html: prompt }}></h3></Header>
                 <Form>
                     <Grid doubling stackable columns={5}>
                       <Grid.Column>
