@@ -15,9 +15,8 @@ const EditQuiz = dynamic(() => import('../../components/admin/EditQuiz'), { ssr:
 const EditTrapForm = dynamic(() => import('../../components/admin/EditTrapForm'), {ssr: false})
 const EditQuestions = dynamic(() => import('../../components/admin/EditQuestions'), {ssr: false})
 
-
 const Dashboard = (client => {
-  const {data: { traps, quiz }, loading}= useQuery(ADMIN_QUERY)
+  const {data: { traps, quiz, welcome }, loading}= useQuery(ADMIN_QUERY)
   const [active, setActive] = useState('quiz')
 
   return (
@@ -30,7 +29,7 @@ const Dashboard = (client => {
         <Menu.Item disabled>Pillars</Menu.Item>
       </Menu>
       {active === 'quiz' &&
-        <EditQuiz quiz={quiz}></EditQuiz>
+        <EditQuiz quiz={quiz} welcome={welcome}></EditQuiz>
       }
       {active === 'traps' &&
         <Grid relaxed celled='internally' style={{width: 800, margin: '0 auto'}}>

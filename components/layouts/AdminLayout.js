@@ -34,8 +34,8 @@ export default function({ client, children }) {
         <title>AIT Admin</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta charSet="utf-8" />
-        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
         <link rel="stylesheet" href="//cdn.quilljs.com/1.2.6/quill.snow.css"></link>
+        <link href="https://fonts.googleapis.com/css?family=Nunito:400,600&display=swap" rel="stylesheet"></link>
       </Head>
       <Menu fixed='top' pointing fluid>
         <Menu.Item name='Admin' active={active === 'edit'} onClick={() => handleClick('edit')}></Menu.Item>
