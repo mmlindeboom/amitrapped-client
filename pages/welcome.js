@@ -10,7 +10,7 @@ import {
 
 export default ({ client }) => {
   const {data, loading} = useQuery(GET_WELCOME)
-  const [welcomeState, setWelcomeState] = useState({header: '', details: ''})
+  const [welcomeState, setWelcomeState] = useState({header: 'Your digital health is important.', details: "Which is why the results of your digital wellness test are yours. We'll only ever ask you for an email to send you results, and a password to secure them in case you want to come back."})
 
   useEffect(() => {
     if (data && data.welcome) setWelcomeState({
