@@ -4,9 +4,7 @@ import Login from '../components/LoginForm'
 
 import {
   Segment,
-  Grid,
-  Divider,
-  Responsive
+  Grid
 } from 'semantic-ui-react'
 
 export default ({client}) => {

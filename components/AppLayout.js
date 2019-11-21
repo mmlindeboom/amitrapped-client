@@ -13,7 +13,7 @@ import {
 } from 'semantic-ui-react'
 import { useMutation} from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
-import { logout } from '../lib/auth'
+import { logout, isAuthenticated } from '../lib/auth'
 
 const LOGOUT_USER = gql`
   mutation logout {
@@ -21,11 +21,10 @@ const LOGOUT_USER = gql`
   }
 `
 
-
 export default function({ client, page, children }) {
   const [logOutUser] = useMutation(LOGOUT_USER)
   const [windowWidth, setWindowWidth] = useState(0)
-
+  const [authenticated] = useState(isAuthenticated())
   const handleLogout = () => {
     logOutUser()
     logout(client)
@@ -52,15 +51,19 @@ export default function({ client, page, children }) {
             <Header.Content>Your Digital Health</Header.Content>
           </Header>
         </Menu.Item>
+
         {page && <Menu.Item active><Icon name="angle right" color='orange' style={{position: 'absolute', left: -8}}></Icon>{page}</Menu.Item>}
-        <Menu.Menu position="right" color="orange">
-          <Dropdown item simple icon="setting" color='orange'>
-            <Dropdown.Menu color='darkGrey'>
-              <Dropdown.Item onClick={handleLogout}><Icon name="hand victory" color="orange"></Icon>Logout</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-        </Menu.Menu>
+        {authenticated &&
+          <Menu.Menu position="right" color="orange">
+            <Dropdown item simple icon="setting" color='orange'>
+              <Dropdown.Menu color='darkGrey'>
+                <Dropdown.Item onClick={handleLogout}><Icon name="hand victory" color="orange"></Icon>Logout</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </Menu.Menu>
+        }
       </Menu>
+
       <Responsive
         fireOnMount
         onUpdate={(e, {width}) => setWindowWidth(width)}

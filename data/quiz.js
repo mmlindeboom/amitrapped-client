@@ -14,19 +14,20 @@ export const GET_QUIZ = gql`
     user {
       firstName
     }
+
     reply {
       token,
       complete,
       completed,
       quiz {
         intro
+        placements {
+          prompt
+        }
       }
       answers {
         value
         id
-        placement {
-          prompt
-        }
       }
     }
   }
