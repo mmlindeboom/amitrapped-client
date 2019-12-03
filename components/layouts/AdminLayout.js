@@ -42,7 +42,7 @@ export default function({ client, children }) {
         <Menu.Item name='Dashboard' disabled></Menu.Item>
         <Menu.Menu position="right" color="orange">
           <Dropdown item simple icon="setting" color='orange'>
-            <Dropdown.Menu color='darkGrey'>
+            <Dropdown.Menu>
               <Dropdown.Item onClick={handleLogout}><Icon name="hand victory" color="orange"></Icon>Logout</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>

@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
+import {useRouter} from 'next/router'
 import {
   Dimmer,
   Menu,
@@ -10,6 +11,7 @@ import {
 import AdminLayout from '../../components/layouts/AdminLayout'
 import { withAdminAuthSync } from '../../lib/auth'
 import { ADMIN_QUERY } from '../../data/admin'
+import Router from '../../routes'
 
 const EditQuiz = dynamic(() => import('../../components/admin/EditQuiz'), { ssr: false})
 const EditTrapForm = dynamic(() => import('../../components/admin/EditTrapForm'), {ssr: false})
@@ -17,15 +19,20 @@ const EditQuestions = dynamic(() => import('../../components/admin/EditQuestions
 
 const Dashboard = (client => {
   const {data: { traps, quiz, welcome }, loading}= useQuery(ADMIN_QUERY)
+  const r = useRouter()
   const [active, setActive] = useState('quiz')
+
+  useEffect(() => {
+    if (r.query.tab) setActive(r.query.tab)
+  }, [r.query])
 
   return (
     <AdminLayout client={client}>
       {loading && <Dimmer><Loader></Loader></Dimmer>}
       <Menu tabular>
-        <Menu.Item active={active === 'quiz'} onClick={() => setActive('quiz')}>Quiz Settings</Menu.Item>
-        <Menu.Item active={active === 'traps'} onClick={() => setActive('traps')}>Traps</Menu.Item>
-        <Menu.Item active={active === 'questions'} onClick={() => setActive('questions')}>Questions</Menu.Item>
+        <Menu.Item active={active === 'quiz'} onClick={() => Router.pushRoute('admin/index', {tab: 'quiz'})}>Quiz Settings</Menu.Item>
+        <Menu.Item active={active === 'traps'} onClick={() => Router.pushRoute('admin/index', { tab: 'traps'})}>Traps</Menu.Item>
+        <Menu.Item active={active === 'questions'} onClick={() => Router.pushRoute('admin/index', { tab: 'questions'})}>Questions</Menu.Item>
         <Menu.Item disabled>Pillars</Menu.Item>
       </Menu>
       {active === 'quiz' &&
