@@ -28,6 +28,9 @@ export const GET_QUIZ = gql`
       answers {
         value
         id
+        placement {
+          prompt
+        }
       }
     }
   }
