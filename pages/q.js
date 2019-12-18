@@ -48,11 +48,16 @@ const q = (({client}) => {
   const [percent, setPercent] = useState(0)
   const [name, setName] = useState('Home')
   const [introSeen, setIntroSeen] = useState(true)
+  const [showLoader, setShowLoader] = useState(false)
 
-  const handleAnswerUpdate = (id, value, index) => {
-    updateAnswer({
+  const handleAnswerUpdate = async (id, value, index) => {
+    setShowLoader(true)
+    await updateAnswer({
       variables: {id: id, value: value}
     })
+
+    setStep(index+1)
+    setShowLoader(false)
   }
 
   if (error) {
@@ -88,9 +93,11 @@ const q = (({client}) => {
               <Button primary onClick={() => Router.push('/traps')}>Show me my digital traps</Button>
             </Segment>
           )}
+
           { !introSeen && reply && <Intro intro={reply.quiz.intro} begin={setIntroSeen}></Intro> }
           { introSeen && !done && isolateStep(answers, step).map((answer, i) => <StepForm prompt={ answer.placement.prompt }
                                           index={step}
+                                          loading={showLoader}
                                           show={true}
                                           handleChange={handleAnswerUpdate}
                                           key={Math.random()}

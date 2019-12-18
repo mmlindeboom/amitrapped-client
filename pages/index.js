@@ -78,8 +78,7 @@ const Home = ({ client }) => {
                   />
                   <Item.Content verticalAlign="middle">
                     <Item.Header as="a">{todo.header}</Item.Header>
-                    <Item.Meta>{todo.meta}</Item.Meta>
-                    <Item.Description>{todo.description}</Item.Description>
+                    <Item.Description><div dangerouslySetInnerHTML={{__html: todo.description}}></div></Item.Description>
                     <Item.Extra>
                       <Responsive {...Responsive.onlyTablet}>
                         <Button
