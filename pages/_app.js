@@ -12,7 +12,6 @@ Sentry.init({
 class MyApp extends App {
   render() {
     const { Component, pageProps, apollo } = this.props;
-    debugger;
     return (
       <Container>
         <ApolloProvider client={apollo}>

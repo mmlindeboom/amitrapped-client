@@ -18,7 +18,6 @@ import Router from 'next/router'
 import QuizLayout from '../components/layouts/QuizLayout'
 import StepForm from '../components/StepForm'
 
-const calcPercent = (completed, total) => parseInt((completed/total) * 100)
 const isolateStep = (array, step) => {
   const clonedArray = array
   if (step === 0 && clonedArray.length) return [clonedArray[0]]
@@ -39,25 +38,21 @@ return (
 }
 
 const q = (({client}) => {
-  const {data: {user}} = useQuery(GET_USER)
-  const {loading, error, data: {reply}}= useQuery(GET_QUIZ)
-  const [updateAnswer, {...answerReq}] = useMutation(UPDATE_ANSWER)
+  const {loading, error, data: { reply }}= useQuery(GET_QUIZ)
+  const [updateAnswer] = useMutation(UPDATE_ANSWER, {
+    refetchQueries: [{ query: GET_USER }, { query: GET_QUIZ}]
+  })
 
   const [step, setStep] = useState(0)
-  const [questions, updateAnswers] = useState([])
-  const [percentComplete, setPercent] = useState('')
+  const [answers, setAnswers] = useState([])
+  const [percent, setPercent] = useState(0)
   const [name, setName] = useState('Home')
-  //TODO: This shit is unsustainable
+  const [introSeen, setIntroSeen] = useState(true)
 
-  const [introSeen, setIntroSeen] = useState(false)
-
-  const handleAnswerUpdate = async (id, value, index) => {
-    const { data } = await updateAnswer({ variables: {id: id, value: value}})
-    const {reply: {completed, answers}} = data.updateAnswer
-
-    updateAnswers(answers)
-    setPercent(calcPercent(completed, answers.length))
-    setStep(index+1)
+  const handleAnswerUpdate = (id, value, index) => {
+    updateAnswer({
+      variables: {id: id, value: value}
+    })
   }
 
   if (error) {
@@ -65,33 +60,23 @@ const q = (({client}) => {
   }
 
   useEffect(() => {
-    // set initial state
-    if (user) {
-      setName(user.firstName)
-      setIntroSeen(user.reply.completed > 0)
-    }
-    if (reply && !questions.length) {
-      updateAnswers(reply.answers)
-      setPercent(calcPercent(reply.completed, reply.answers.length))
+    if (reply) {
+      console.log('reply updating')
+      setAnswers(reply.answers)
+      setIntroSeen(reply.percentComplete > 0)
+      setPercent(reply.percentComplete)
       setStep(reply.completed || 0)
     }
+  }, [reply])
 
-  }, [user, reply])
 
-  useEffect(() => {
-    if (answerReq.data) {
-      const { completed } = answerReq.data.updateAnswer.reply
-      setIntroSeen(completed > 0)
-    }
-  }, [answerReq])
-
-  const done = (questions.length && step === questions.length)
+  const done = (answers.length && step === answers.length)
 
   return (
     <QuizLayout name={ name }>
       <Grid style={{minHeight: '325px'}}>
         <Grid.Column verticalAlign="middle">
-          { (loading || answerReq.loading) && <Dimmer active inverted><Loader></Loader></Dimmer> }
+          { loading && <Dimmer active inverted><Loader></Loader></Dimmer> }
 
           { done && (
             <Segment placeholder>
@@ -103,8 +88,8 @@ const q = (({client}) => {
               <Button primary onClick={() => Router.push('/traps')}>Show me my digital traps</Button>
             </Segment>
           )}
-          { !introSeen && user && <Intro intro={user.reply.quiz.intro} begin={setIntroSeen}></Intro> }
-          { introSeen && !done && isolateStep(questions, step).map((answer, i) => <StepForm prompt={ answer.placement.prompt }
+          { !introSeen && reply && <Intro intro={reply.quiz.intro} begin={setIntroSeen}></Intro> }
+          { introSeen && !done && isolateStep(answers, step).map((answer, i) => <StepForm prompt={ answer.placement.prompt }
                                           index={step}
                                           show={true}
                                           handleChange={handleAnswerUpdate}
@@ -113,7 +98,7 @@ const q = (({client}) => {
                                           {...answer} />)}
         </Grid.Column>
       </Grid>
-      {introSeen && !loading && <Progress percent={percentComplete}
+      {introSeen && !loading && <Progress percent={percent}
                            progress
                            size="small"
                            color="olive"></Progress> }

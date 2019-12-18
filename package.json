@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "proxy": {
-    "api": "http://127.0.0.1:3001"
+    "api": "http://localhost:3001"
   },
   "scripts": {
     "dev": "next",

@@ -18,6 +18,7 @@ import {
 } from 'semantic-ui-react'
 import AppLayout from '../components/AppLayout'
 import TrapCard from '../components/TrapCard'
+import { GET_USER, UPDATE_USER_HAS_REVIEWED_TRAPS } from '../data/user'
 
 const isolateStep = (array, step) => {
   const clonedArray = array
@@ -29,7 +30,17 @@ const isolateStep = (array, step) => {
 }
 
 const Traps = (({client}) => {
-  const {data: {userTraps}, loading}= useQuery(USER_TRAPS)
+  const {data: {userTraps, user}, loading}= useQuery(USER_TRAPS)
+
+  const [updateUserReviewedTraps] = useMutation(UPDATE_USER_HAS_REVIEWED_TRAPS, {
+    refetchQueries: [{query: GET_USER }]
+  })
+
+  useEffect(() => {
+    if (user && !user.reviewedTraps) {
+      updateUserReviewedTraps()
+    }
+  }, [user])
   return (
     <AppLayout client={client} page='Traps'>
       <Grid relaxed>
@@ -59,7 +70,7 @@ const Traps = (({client}) => {
         </Grid.Row>
         <Grid.Row>
           <Grid.Column>
-            {userTraps && userTraps.length > 1 && (
+            {userTraps && userTraps.length >= 1 && (
                 <div>
                   {loading && <Dimmer><Loader></Loader></Dimmer>}
                   {userTraps && userTraps.map((trap, idx) => <TrapCard isVisible={true} key={idx} {...trap}></TrapCard>)}

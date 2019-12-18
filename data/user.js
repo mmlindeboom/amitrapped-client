@@ -5,9 +5,11 @@ export const GET_USER = gql`
     user {
       firstName
       admin
+      reviewedTraps
       reply {
         token
         completed
+        percentComplete
         quiz {
           intro
         }
@@ -18,6 +20,9 @@ export const GET_USER = gql`
 
 export const USER_TRAPS = gql`
   query {
+    user {
+      reviewedTraps
+    }
     userTraps {
       id
       name
@@ -53,6 +58,14 @@ export const SIGNUP_USER = gql`
         path
         message
       }
+    }
+  }
+`
+
+export const UPDATE_USER_HAS_REVIEWED_TRAPS = gql`
+  mutation updateTrapsReviewed {
+    updateTrapsReviewed {
+      reviewedTraps
     }
   }
 `

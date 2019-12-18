@@ -9,16 +9,28 @@ export const GET_WELCOME = gql`
   }
 `
 
+export const GET_SERVICES = gql`
+  query {
+    services {
+      title,
+      body,
+      tag
+    }
+  }
+`
 export const GET_QUIZ = gql`
   query {
     user {
       firstName
+      admin
+      reviewedTraps
     }
 
     reply {
       token,
       complete,
       completed,
+      percentComplete
       quiz {
         intro
         placements {
@@ -43,6 +55,7 @@ export const UPDATE_ANSWER = gql`
         token,
         complete,
         completed,
+        percentComplete,
         answers {
           value
           id

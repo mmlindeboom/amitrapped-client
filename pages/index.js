@@ -1,6 +1,6 @@
-import { useQuery } from '@apollo/react-hooks'
-import { useState, useEffect } from 'react'
-import Router from 'next/router'
+import { useQuery } from "@apollo/react-hooks";
+import { useState, useEffect } from "react";
+import Router from "next/router";
 import {
   Button,
   Dimmer,
@@ -12,44 +12,56 @@ import {
   Loader,
   Segment,
   Responsive
-} from 'semantic-ui-react'
-import { withAuthSync } from '../lib/auth'
-import { GET_USER } from '../data/user'
-import todos from '../data/todos'
-import AppLayout from '../components/AppLayout'
-import Steps from '../components/Steps'
+} from "semantic-ui-react";
+import { withAuthSync } from "../lib/auth";
+import { GET_USER } from "../data/user";
+import todos from "../data/todos";
+import AppLayout from "../components/AppLayout";
+import Steps from "../components/Steps";
 
-// TODO: Undo hardcoding of this number
-const QUESTIONS_COUNT = 31
-const Home = (({client}) => {
-  const {loading, error, data} = useQuery(GET_USER)
-  const [userState, setUserState] = useState({name: '', percentComplete: 0})
-  const [todo, setTodo] = useState(todos['incomplete'])
+const Home = ({ client }) => {
+  const { loading, error, data } = useQuery(GET_USER);
+  const [userState, setUserState] = useState({
+    name: "",
+    percentComplete: 0,
+    reviewedTraps: false
+  });
+  const [todo, setTodo] = useState(todos["incomplete"]);
 
   if (error) {
-    return <div>{error.message}</div>
+    return <div>{error.message}</div>;
   }
 
   useEffect(() => {
     if (data && data.user) {
-      let percent = parseInt((data.user.reply.completed/QUESTIONS_COUNT)*100)
-      let status = percent < 100 ? 'incomplete' : 'complete'
+      let user = data.user
+      let percent = user.reply.percentComplete
+      let status = user.reviewedTraps
+        ? "takeAction"
+        : percent < 100
+        ? "incomplete"
+        : "complete";
       setUserState({
-        name: data.user.firstName,
-        percentComplete: percent
-      })
-      setTodo(todos[status])
+        name: user.firstName,
+        percentComplete: percent,
+        status: status
+      });
+      setTodo(todos[status]);
     }
-  }, [data])
+  }, [data]);
 
   return (
     <AppLayout client={client}>
       <Grid celled="internally" relaxed>
-        {loading && <Dimmer active inverted><Loader></Loader></Dimmer>}
+        {loading && (
+          <Dimmer active inverted>
+            <Loader></Loader>
+          </Dimmer>
+        )}
         <Grid.Row stretched>
           <Grid.Column>
             <Header>The Plan</Header>
-            <Steps percentComplete={userState.percentComplete} inverted></Steps>
+            <Steps percentComplete={userState.percentComplete} status={userState.status} inverted></Steps>
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
@@ -58,35 +70,48 @@ const Home = (({client}) => {
             <Segment>
               <Item.Group>
                 <Item>
-                  <Image size="small" circular bordered src='/static/ReviewTraps.png' />
+                  <Image
+                    size="small"
+                    circular
+                    bordered
+                    src="/static/ReviewTraps.png"
+                  />
                   <Item.Content verticalAlign="middle">
-                    <Item.Header as='a'>{todo.header}</Item.Header>
+                    <Item.Header as="a">{todo.header}</Item.Header>
                     <Item.Meta>{todo.meta}</Item.Meta>
-                    <Item.Description>
-                      {todo.description}
-                    </Item.Description>
+                    <Item.Description>{todo.description}</Item.Description>
                     <Item.Extra>
-
-
-                    <Responsive {...Responsive.onlyTablet}>
-                      <Button primary fluid onClick={() => Router.push(todo.url)}>
+                      <Responsive {...Responsive.onlyTablet}>
+                        <Button
+                          primary
+                          fluid
+                          onClick={() => Router.push(todo.url)}
+                        >
                           {todo.cta}
-                          <Icon name='right chevron' />
+                          <Icon name="right chevron" />
                         </Button>
-                    </Responsive>
+                      </Responsive>
 
-                    <Responsive {...Responsive.onlyComputer}>
-                      <Button primary floated='right' onClick={() => Router.push(todo.url)}>
+                      <Responsive {...Responsive.onlyComputer}>
+                        <Button
+                          primary
+                          floated="right"
+                          onClick={() => Router.push(todo.url)}
+                        >
                           {todo.cta}
-                          <Icon name='right chevron' />
+                          <Icon name="right chevron" />
                         </Button>
-                    </Responsive>
-                    <Responsive {...Responsive.onlyMobile}>
-                      <Button primary fluid onClick={() => Router.push(todo.url)}>
+                      </Responsive>
+                      <Responsive {...Responsive.onlyMobile}>
+                        <Button
+                          primary
+                          fluid
+                          onClick={() => Router.push(todo.url)}
+                        >
                           {todo.cta}
-                          <Icon name='right chevron' />
+                          <Icon name="right chevron" />
                         </Button>
-                    </Responsive>
+                      </Responsive>
                     </Item.Extra>
                   </Item.Content>
                 </Item>
@@ -96,7 +121,7 @@ const Home = (({client}) => {
         </Grid.Row>
       </Grid>
     </AppLayout>
-  )
-})
+  );
+};
 
-export default withAuthSync(Home)
+export default withAuthSync(Home);

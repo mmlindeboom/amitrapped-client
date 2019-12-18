@@ -35,6 +35,12 @@ export const ADMIN_QUERY = gql`
       id
       intro
     }
+    services {
+      id
+      tag
+      title
+      body
+    }
   }
 `;
 export const GET_QUESTIONS = gql`
@@ -80,6 +86,42 @@ export const UPDATE_QUIZ = gql`
   }
 `;
 
+export const CREATE_SERVICE = gql`
+  mutation createService(
+    $title: String!
+    $body: String!
+    $tag: String!
+  ) {
+    createService(
+      title: $title
+      body: $body
+      tag: $tag
+    ) {
+      id
+      tag
+      title
+      body
+    }
+  }
+`
+export const UPDATE_SERVICE = gql`
+  mutation updateService(
+    $id: ID!
+    $title: String!
+    $body: String!
+  ) {
+    updateService(
+      id: $id
+      title: $title
+      body: $body
+
+    ) {
+      id
+      title
+      body
+    }
+  }
+`
 export const UPDATE_SIGNUP_MESSAGES = gql`
   mutation updateSignupMessages(
     $id: ID!
