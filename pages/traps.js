@@ -199,39 +199,78 @@ const Traps = ({ client }) => {
                   </Dimmer>
                 )}
                 <Header style={{marginTop: 35}}as="h4">Your traps:</Header>
-                <Card.Group itemsPerRow={2} style={{ padding: "25px" }}>
+                <Responsive minWidth={Responsive.onlyTablet.minWidth}>
+                  <Card.Group itemsPerRow={2} style={{ padding: "25px" }}>
+                    {userTraps &&
+                      userTraps.filter(trap => trap.score >= 3).map((trap, idx) => (
+                        <TrapCard
+                          as={TrapCard}
+                          activeTrap={activeTrap}
+                          toggleActiveTrap={toggleActiveTrap}
+                          placement={idx}
+                          key={idx}
+                          highlight={
+                            activeTrap ? activeTrap.name === trap.name : false
+                          }
+                          {...trap}
+                        />
+                      ))}
+                  </Card.Group>
+                </Responsive>
+
+                <Responsive {...Responsive.onlyMobile}>
                   {userTraps &&
-                    userTraps.filter(trap => trap.score >= 3).map((trap, idx) => (
-                      <TrapCard
-                        as={TrapCard}
-                        activeTrap={activeTrap}
-                        toggleActiveTrap={toggleActiveTrap}
-                        placement={idx}
-                        key={idx}
-                        highlight={
-                          activeTrap ? activeTrap.name === trap.name : false
-                        }
-                        {...trap}
-                      />
-                    ))}
-                </Card.Group>
+                      userTraps.filter(trap => trap.score >= 3).map((trap, idx) => (
+                        <TrapCard
+                          activeTrap={activeTrap}
+                          toggleActiveTrap={toggleActiveTrap}
+                          placement={idx}
+                          key={idx}
+                          mobile
+                          highlight={
+                            activeTrap ? activeTrap.name === trap.name : false
+                          }
+                          {...trap}
+                        />
+                      ))}
+                </Responsive>
+
                <Header as="h4">The rest:</Header>
+               <Responsive minWidth={Responsive.onlyTablet.minWidth}>
                 <Card.Group itemsPerRow={2} style={{ padding: "25px" }}>
-                  {userTraps &&
-                    userTraps.filter(trap => trap.score < 3).map((trap, idx) => (
-                      <TrapCard
-                        as={TrapCard}
-                        activeTrap={activeTrap}
-                        toggleActiveTrap={toggleActiveTrap}
-                        placement={idx}
-                        key={idx}
-                        highlight={
-                          activeTrap ? activeTrap.name === trap.name : false
-                        }
-                        {...trap}
-                      />
-                    ))}
-                </Card.Group>
+                    {userTraps &&
+                      userTraps.filter(trap => trap.score < 3).map((trap, idx) => (
+                        <TrapCard
+                          as={TrapCard}
+                          activeTrap={activeTrap}
+                          toggleActiveTrap={toggleActiveTrap}
+                          placement={idx}
+                          key={idx}
+                          highlight={
+                            activeTrap ? activeTrap.name === trap.name : false
+                          }
+                          {...trap}
+                        />
+                      ))}
+                  </Card.Group>
+               </Responsive>
+               <Responsive {...Responsive.onlyMobile}>
+                {userTraps &&
+                      userTraps.filter(trap => trap.score < 3).map((trap, idx) => (
+                        <TrapCard
+                          activeTrap={activeTrap}
+                          toggleActiveTrap={toggleActiveTrap}
+                          placement={idx}
+                          key={idx}
+                          mobile
+                          highlight={
+                            activeTrap ? activeTrap.name === trap.name : false
+                          }
+                          {...trap}
+                        />
+                      ))}
+               </Responsive>
+
               </div>
             )}
           </Grid.Column>

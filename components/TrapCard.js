@@ -21,7 +21,7 @@ const StepForm = ({
   placement,
   active = false,
   toggleActiveTrap,
-  fluid = false,
+  mobile = false,
   stuck
 }) => {
 
@@ -52,31 +52,31 @@ const StepForm = ({
 
       </div>
     );
+  } else if (mobile) {
+    return (
+
+      <Grid verticalAlign="middle">
+        <Grid.Column>
+          <Segment raised={stuck}>
+            <Item.Group>
+              <Item>
+                <Item.Image src={imageUrl} size='tiny' />
+                <Item.Content verticalAlign="middle">
+                  <Item.Header>{name}</Item.Header>
+                  <Item.Description>
+                    <p dangerouslySetInnerHTML={{ __html: description }}></p>
+                  </Item.Description>
+                </Item.Content>
+              </Item>
+            </Item.Group>
+            <Label color="teal">Trap Risk: {score > 4 ? 'Very High' : (score > 3 ? 'High' : (score === 3 ? 'Medium' : 'Low'))}</Label>
+            </Segment>
+        </Grid.Column>
+      </Grid>
+    );
   } else {
     return (
-      <div>
-        <Responsive {...Responsive.onlyMobile}>
-          <Grid verticalAlign="middle">
-            <Grid.Column>
-              <Segment raised={stuck}>
-                <Item.Group>
-                  <Item>
-                    <Item.Image src={imageUrl} size='tiny' />
-                    <Item.Content verticalAlign="middle">
-                      <Item.Header>{name}</Item.Header>
-                      <Item.Description>
-                        <p dangerouslySetInnerHTML={{ __html: description }}></p>
-                      </Item.Description>
-                    </Item.Content>
-                  </Item>
-                </Item.Group>
-                <Label color="teal">Trap Risk: {score > 4 ? 'Very High' : (score > 3 ? 'High' : (score === 3 ? 'Medium' : 'Low'))}</Label>
-                </Segment>
-            </Grid.Column>
-          </Grid>
-        </Responsive>
-        <Responsive minWidth={Responsive.onlyTablet.minWidth}>
-          <Card fluid={fluid} style={highlightStyle}>
+      <Card style={highlightStyle}>
           <Card.Content>
             <Label attached="top right">{placement + 1}</Label>
             <Image src={imageUrl} floated="right" size="small"></Image>
@@ -104,11 +104,8 @@ const StepForm = ({
               Read more
             </Button>
           </Card.Content>
-
         </Card>
-        </Responsive>
-      </div>
-    );
+    )
   }
 };
 
