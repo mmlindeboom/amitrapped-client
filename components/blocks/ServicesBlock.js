@@ -10,7 +10,7 @@ export default function({services, onUpdate, editable = false}) {
   const [servicesState, setServicesState] = useState(services || [])
 
   useEffect(() => {
-    if (services.length) {
+    if (services && services.length) {
       setServicesState(services)
     }
 

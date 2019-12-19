@@ -25,6 +25,7 @@
 @pink           : #FF1493;
 @brown          : #A52A2A;
 @grey           : lighten(@darkGrey, 50%);
+@slightGray     : lighten(@darkGrey, 30%);
 @darkGrey       : #333e48;
 @black          : #000000;
 
