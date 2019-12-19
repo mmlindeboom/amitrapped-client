@@ -180,7 +180,7 @@ const Traps = ({ client }) => {
                   stickyStyle={{
                     width: "120%",
                     background: "#ffffff",
-                    zIndex: 100
+                    zIndex: 100,
                   }}
                   onFixedToggle={() => setStuck(true)}
                 >
@@ -196,9 +196,27 @@ const Traps = ({ client }) => {
                     <Loader></Loader>
                   </Dimmer>
                 )}
+                <Header style={{marginTop: 35}}as="h4">Your traps:</Header>
                 <Card.Group itemsPerRow={2} style={{ padding: "25px" }}>
                   {userTraps &&
-                    userTraps.map((trap, idx) => (
+                    userTraps.filter(trap => trap.score >= 3).map((trap, idx) => (
+                      <TrapCard
+                        as={TrapCard}
+                        activeTrap={activeTrap}
+                        toggleActiveTrap={toggleActiveTrap}
+                        placement={idx}
+                        key={idx}
+                        highlight={
+                          activeTrap ? activeTrap.name === trap.name : false
+                        }
+                        {...trap}
+                      />
+                    ))}
+                </Card.Group>
+               <Header as="h4">The rest:</Header>
+                <Card.Group itemsPerRow={2} style={{ padding: "25px" }}>
+                  {userTraps &&
+                    userTraps.filter(trap => trap.score < 3).map((trap, idx) => (
                       <TrapCard
                         as={TrapCard}
                         activeTrap={activeTrap}
