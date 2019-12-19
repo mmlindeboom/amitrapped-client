@@ -16,7 +16,7 @@ import {
   Grid,
   Segment,
   Card,
-  Ref,
+  Responsive,
   Divider
 } from "semantic-ui-react";
 import AppLayout from "../components/AppLayout";
@@ -176,16 +176,18 @@ const Traps = ({ client }) => {
 
             <div style={{ position: "relative" }}>
               {activeTrap && (
-                <Sticky
-                  stickyStyle={{
-                    width: "120%",
-                    background: "#ffffff",
-                    zIndex: 100,
-                  }}
-                  onFixedToggle={() => setStuck(true)}
-                >
-                  <TrapCard stuck={stuck} {...activeTrap} />
-                </Sticky>
+                <Responsive minWidth={Responsive.onlyTablet.minWidth}>
+                    <Sticky
+                    stickyStyle={{
+                      width: "120%",
+                      background: "#ffffff",
+                      zIndex: 100,
+                    }}
+                    onFixedToggle={() => setStuck(true)}
+                  >
+                    <TrapCard stuck={stuck} {...activeTrap} />
+                  </Sticky>
+                </Responsive>
               )}
             </div>
 
