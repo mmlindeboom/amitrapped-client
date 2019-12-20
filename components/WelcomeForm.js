@@ -2,14 +2,40 @@ import { useState, useEffect } from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import { GET_WELCOME } from '../data/quiz'
 import {
+  Divider,
   Segment,
   Grid,
   Header,
-  Responsive,
+  Responsive
 } from "semantic-ui-react";
 import SignupForm from './SignupForm'
 import ParagraphLoader from './ParagraphLoader'
-export default function({loading, header, description}) {
+import Link from 'next/link'
+export default function({ disableSignup, loading, header, description}) {
+
+  if (disableSignup) {
+    return(
+      <Segment textAlign="center" stacked style={{ maxWidth: 450, margin: "0 auto" }}>
+        <Grid>
+          <Grid.Column verticalAlign="middle">
+            <Header as="h1" color="teal">We're at capacity!</Header>
+            <Header as="h4" color="darkgrey">
+              We're in Beta, so we have limited capacity. Stay tuned.
+              Please reach out and let's see if we can get you set up.
+              There's just two of us so please be patient! :) <a href="mailto:samantha@thedigitalbehaviorist.com">Email here</a>
+            </Header>
+            <Divider></Divider>
+            <p>
+              or{" "}
+              <Link href="/login">
+                <a style={{ textDecoration: "underline" }}>Login</a>
+              </Link>
+            </p>
+          </Grid.Column>
+        </Grid>
+      </Segment>
+    )
+  }
   return (
     <Segment stacked style={{ maxWidth: 800, margin: "0 auto" }}>
       <Grid columns="equal" stackable>

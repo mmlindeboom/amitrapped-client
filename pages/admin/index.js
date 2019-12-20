@@ -17,9 +17,10 @@ const EditAction = dynamic(() => import('../../components/admin/EditAction'), {s
 const EditQuiz = dynamic(() => import('../../components/admin/EditQuiz'), { ssr: false})
 const EditTrapForm = dynamic(() => import('../../components/admin/EditTrapForm'), {ssr: false})
 const EditQuestions = dynamic(() => import('../../components/admin/EditQuestions'), {ssr: false})
+const UserList = dynamic(() => import('../../components/admin/UserList'), {ssr: false})
 
 const Dashboard = (client => {
-  const {data: { traps, quiz, welcome, services }, loading, refetch}= useQuery(ADMIN_QUERY)
+  const {data: { traps, activeQuiz, welcome, services }, loading, refetch}= useQuery(ADMIN_QUERY)
   const r = useRouter()
   const [active, setActive] = useState('quiz')
 
@@ -35,10 +36,11 @@ const Dashboard = (client => {
         <Menu.Item active={active === 'traps'} onClick={() => Router.pushRoute('admin/index', { tab: 'traps'})}>Traps</Menu.Item>
         <Menu.Item active={active === 'questions'} onClick={() => Router.pushRoute('admin/index', { tab: 'questions'})}>Questions</Menu.Item>
         <Menu.Item active={active === 'services'} onClick={() => Router.pushRoute('admin/index', {tab: 'services'})}>Services</Menu.Item>
+        <Menu.Item active={active === 'users'} onClick={() => Router.pushRoute('admin/index', {tab: 'users'})}>Users</Menu.Item>
         <Menu.Item disabled>Pillars</Menu.Item>
       </Menu>
       {active === 'quiz' &&
-        <EditQuiz quiz={quiz} welcome={welcome}></EditQuiz>
+        <EditQuiz quiz={activeQuiz} welcome={welcome}></EditQuiz>
       }
       {active === 'traps' &&
         <Grid relaxed celled='internally' style={{width: 800, margin: '0 auto'}}>
@@ -53,6 +55,7 @@ const Dashboard = (client => {
       }
       {active === 'questions' && <EditQuestions traps={traps}/>}
       {active === 'services' && <EditAction refetch={refetch} services={services}></EditAction>}
+      {active === 'users' && <UserList quiz={activeQuiz} />}
 
     </AdminLayout>
   )

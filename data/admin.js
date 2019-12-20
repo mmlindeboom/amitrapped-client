@@ -12,8 +12,25 @@ export const AUTHENTICATE_ADMIN = gql`
   }
 `;
 
+export const USERS_QUERY = gql`
+  query {
+    users {
+      email
+      firstName
+      reply {
+        complete
+      }
+    }
+  }
+`
 export const ADMIN_QUERY = gql`
   query {
+    activeQuiz {
+      id
+      intro
+      userLimit
+      disableSignup
+    }
     traps {
       id
       name
@@ -28,13 +45,10 @@ export const ADMIN_QUERY = gql`
       }
     }
     welcome {
-      header,
+      header
       description
     }
-    quiz {
-      id
-      intro
-    }
+
     services {
       id
       tag
@@ -51,6 +65,14 @@ export const GET_QUESTIONS = gql`
       trap {
         name
       }
+    }
+  }
+`;
+
+export const UPDATE_USER_LIMIT = gql`
+  mutation updateUserLimit($id: ID!, $limit: Int!) {
+    updateUserLimit(id: $id, limit: $limit) {
+      userLimit
     }
   }
 `;

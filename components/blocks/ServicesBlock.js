@@ -17,27 +17,29 @@ export default function({services, onUpdate, editable = false}) {
   }, [services])
   return (
     <div>
-       <Grid celled="internally" relaxed>
+       <Grid relaxed celled="internally">
         {/* {loading && <Dimmer active inverted><Loader></Loader></Dimmer>} */}
         <Grid.Row stretched>
           <Grid.Column>
             <Header>Journey to Digital Wellness</Header>
           </Grid.Column>
         </Grid.Row>
-        <Grid.Row columns={2}>
-          <Grid.Column>
-            <WorkshopCardGroup
-              cards={servicesState.filter(service => service.tag === "workshop")}
-              editable={editable}
-            />
-          </Grid.Column>
-          <Grid.Column>
-            {servicesState
-              .filter(service => service.tag === "profile")
-              .map((card, i)=> (
-                <ProfileCard card={card} editable={editable} onUpdate={onUpdate} key={i}/>
-              ))}
-          </Grid.Column>
+        <Grid.Row>
+          <Grid stackable columns={2} celled="internally" >
+            <Grid.Column>
+              <WorkshopCardGroup
+                cards={servicesState.filter(service => service.tag === "workshop")}
+                editable={editable}
+              />
+            </Grid.Column>
+            <Grid.Column>
+              {servicesState
+                .filter(service => service.tag === "profile")
+                .map((card, i)=> (
+                  <ProfileCard card={card} editable={editable} onUpdate={onUpdate} key={i}/>
+                ))}
+            </Grid.Column>
+          </Grid>
         </Grid.Row>
       </Grid>
       {servicesState

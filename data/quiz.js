@@ -2,6 +2,10 @@ import { gql } from 'apollo-boost'
 
 export const GET_WELCOME = gql`
   query {
+    activeQuiz {
+      disableSignup
+    }
+
     welcome {
       header
       description
