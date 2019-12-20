@@ -8,15 +8,13 @@ export default {
   },
   complete: {
     header: "Review your traps",
-    meta: "It's the next step",
-    description: "Here's a test",
+    description: "Learn about the digital traps in your path to wellness.",
     cta: 'Review',
     url: "/traps"
   },
   takeAction: {
     header: "Take Action",
-    meta: "It's the next step",
-    description: "Here's a test",
+    description: "Next steps for how to tackle the traps in your path to wellness.",
     cta: 'Review',
     url: "/action"
   }
