@@ -123,6 +123,8 @@ const SignupForm = ({ token }) => {
                 I'm ready to take the quiz!
               </Button>
             </Segment>
+            <Divider ></Divider>
+          <p>or <Link href='/login'><a style={{textDecoration: 'underline'}}>Login</a></Link></p>
           </Form>
         </Grid.Column>
       </Grid>
