@@ -41,7 +41,7 @@ export default function({ client, page, children }) {
   return (
     <Container>
       <Head>
-        <title>Am I Trapped?</title>
+        <title>The Digital Behaviorist</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta charSet="utf-8" />
         <link rel="icon" type="image/x-icon" href="../static/favicon.ico" />
